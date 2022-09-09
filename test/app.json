@@ -1,0 +1,58 @@
+{
+  "id": "40c8ca18-6284-4d6a-809f-530fb66b4d87",
+  "name": "Request Document System Test",
+  "publisher": "PASI",
+  "version": "0.0.0.1",
+  "brief": "This app provides the test automation for the regular features of the request document system.",
+  "description": "This app contains the complete test automation for the request document system functionality",
+  "privacyStatement": "https://pasi.ph/privacy-policy/",
+  "EULA": "https://pasi.ph/eula/",
+  "help": "https://pasi.ph/resources/#reqdocsys",
+  "url": "https://pasi.ph/applications/#reqdocsys",
+  "logo": "./logo/icon.png",
+  "dependencies": [
+    {
+      "id": "1ba340c4-00ef-49e9-9954-10bdffc83a2a",
+      "name": "PASI Licensing Management",
+      "publisher": "PASI",
+      "version": "1.0.0.0"
+    },    
+    {
+      "id": "25a9851d-b839-4163-8fd2-f7e922d0339d",
+      "name": "Request Document System",
+      "publisher": "PASI",
+      "version": "0.0.0.2"
+    },
+    {
+      "id": "dd0be2ea-f733-4d65-bb34-a28f4624fb14",
+      "publisher": "Microsoft",
+      "name": "Library Assert",
+      "version": "18.0.0.0"
+    },
+    {
+      "id": "5095f467-0a01-4b99-99d1-9ff1237d286f",
+      "publisher": "Microsoft",
+      "name": "Library Variable Storage",
+      "version": "18.0.0.0"
+    },
+    { 
+      "id": "23de40a6-dfe8-4f80-80db-d70f83ce8caf",
+      "publisher": "Microsoft",
+      "name": "Test Runner",
+      "version": "18.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "1.0.0.0",
+  "application": "18.0.0.0",
+  "idRanges": [
+    {
+      "from": 70830055,
+      "to": 70830074
+    }
+  ],
+  "contextSensitiveHelpUrl": "https://pasi.ph/resources/",
+  "showMyCode": true,
+  "runtime": "7.0",
+  "features": ["TranslationFile"]
+}

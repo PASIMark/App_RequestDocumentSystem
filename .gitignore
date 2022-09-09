@@ -1,0 +1,5 @@
+*.app
+.alpackages
+.snapshot
+.snapshots
+rad.json

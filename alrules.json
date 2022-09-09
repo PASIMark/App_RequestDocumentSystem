@@ -1,0 +1,32 @@
+{
+    "name":"Requisition Rules",
+    "description":"Rules for Requisition",
+    "rules":
+    [
+        {
+            "id" : "AA0021",
+            "action" : "Hidden",
+            "justification" : "Disable - Variable declarations should be ordered by type. Variables should be sorted like this: Record, Report, Codeunit, XmlPort, Page, Query, Notification, BigText, DateFormula, RecordId, RecordRef, FieldRef, and FilterPageBuilder. The rest of the variables are not sorted."
+        },        
+        {
+            "id" : "AA0072",
+            "action" : "Hidden",
+            "justification" : "Disable - The name of # is not valid. The name of variables and parameters must be suffixed with the type or object name."
+        },
+        {
+            "id" : "AA0215",
+            "action" : "Hidden",
+            "justification" : "The file # has an incorrect name. The valid name is #."
+        },
+        {
+            "id" : "AA0232",
+            "action" : "Hidden",
+            "justification" : "The FlowField # of # should be added to the SIFT key."
+        },
+        {
+            "id": "AS0056",
+            "action": "Hidden",
+            "justification": "The code 'W1' is not a valid ISO 3166-1 alpha-2 code for a country supported by the product."
+        }
+    ]
+}

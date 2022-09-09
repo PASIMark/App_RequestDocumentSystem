@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			// Base Request Document System
+			"name": "base",
+			"path": "base"
+		},
+		{
+			// Test Automation Request Document System
+			"name": "test",
+			"path": "test"
+		}
+	],
+	"settings": {
+		"al.packageCachePath": "../.alpackages",
+		"al.snapshotDebuggingPath": "../.snapshot",
+		"al.snapshotOutputPath": "../.snapshots",
+		"al.enableCodeAnalysis": true,
+		"al.codeAnalyzers": [
+		"${AppsourceCop}","${CodeCop}","${UICop}"
+		],
+		"al.ruleSetPath": "../alrules.json"
+	}
+}

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="Request Document System Test">
+    <body>
+      <group id="body">
+        <trans-unit id="Codeunit 3393100814 - NamedType 4191396700" size-unit="char" translate="yes" xml:space="preserve">
+          <source>%1 setup data have not been inserted.</source>
+          <note from="Developer" annotates="general" priority="2">%1 = Table name</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PPHRDS_RequestDocumentGeneral - NamedType SetupDataHaveNotBeenInsertedLbl</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2464833661 - NamedType 2195839024" size-unit="char" translate="yes" xml:space="preserve">
+          <source>RDhDPiRZLVZSMCAzKRRFFFZSMCBFOSZWJGxjQDJDOyVVKWljQTAzKRRFFFZSMCAzKRRFFFZSMCBHKRRFFFZSMCAzKRRFFFZSMCAzKUZqRcKLd2NUM01DaEnCg3deVDNcTXhIe38=</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PPHRDS_TestLibrary - NamedType LicenseKeyTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2464833661 - NamedType 4110735509" size-unit="char" translate="yes" xml:space="preserve">
+          <source>25a9851d-b839-4163-8fd2-f7e922d0339d</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PPHRDS_TestLibrary - NamedType ReqDocSysAppIDTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2464833661 - NamedType 2235091419" size-unit="char" translate="yes" xml:space="preserve">
+          <source>REQ</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PPHRDS_TestLibrary - NamedType REQNoSeriesCodeTxt</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
