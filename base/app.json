@@ -2,7 +2,7 @@
   "id": "25a9851d-b839-4163-8fd2-f7e922d0339d",
   "name": "Request Document System",
   "publisher": "PASI",
-  "version": "1.0.0.5",
+  "version": "1.0.0.6",
   "brief": "Request Document System",
   "description": "Request Document System",
   "privacyStatement": "https://pasi.ph/privacy-policy/",
@@ -15,7 +15,7 @@
       "id": "1ba340c4-00ef-49e9-9954-10bdffc83a2a",
       "name": "PASI Licensing Management",
       "publisher": "PASI",
-      "version": "1.0.0.6"
+      "version": "1.0.0.7"
     }
   ],
   "screenshots": [],
