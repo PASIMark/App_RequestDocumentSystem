@@ -369,6 +369,11 @@ table 70829616 PPHRDS_ReqLine
             Caption = 'Currency Code';
             Editable = false;
             TableRelation = Currency;
+
+            trigger OnValidate()
+            begin
+                TestField("Request Type", "Request Type"::"General Journal");
+            end;
         }
         field(100; "Unit Cost"; Decimal)
         {

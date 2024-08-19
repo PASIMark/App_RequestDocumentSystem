@@ -1003,6 +1003,8 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         parGenJournalLine.Description := ReqLine.Description;
         parGenJournalLine.Validate(Quantity, ReqLine."Qty. to Process");
         parGenJournalLine.Validate(Amount, ReqLine."Direct Unit Cost" * ReqLine."Qty. to Process");
+        if ReqLine."Currency Code" <> '' then
+            parGenJournalLine.Validate("Currency Code", ReqLine."Currency Code");
         parGenJournalLine.Description := ReqLine.Description;
         ReqHeader.Get(ReqLine."Document No.");
         parGenJournalLine.CopyLinks(ReqHeader);
@@ -1066,6 +1068,7 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         parProcessedRequestEntry."Direct Unit Cost" := ReqLine."Direct Unit Cost";
         parProcessedRequestEntry."Unit Cost" := ReqLine."Unit Cost";
         parProcessedRequestEntry."Line Amount" := ReqLine."Line Amount";
+        parProcessedRequestEntry."Currency Code" := ReqLine."Currency Code";
         parProcessedRequestEntry."Job No." := ReqLine."Job No.";
         parProcessedRequestEntry."Job Task No." := ReqLine."Job Task No.";
         parProcessedRequestEntry."Vendor No." := ReqLine."Vendor No.";
