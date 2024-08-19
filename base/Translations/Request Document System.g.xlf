@@ -2253,6 +2253,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestSubform - Control Applies-to Purch. Doc. No. - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 205228893 - Control 4198939294 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the Currency Code.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestSubform - Control Currency Code - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 205228893 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the Description.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -3807,6 +3812,11 @@
           <source>Specifies the Applies-to Purch. Doc. No..</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestSubform - Control Applies-to Purch. Doc. No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1658663251 - Control 4198939294 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the Currency Code.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestSubform - Control Currency Code - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 1658663251 - Control 3461834954 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the Description.</source>
