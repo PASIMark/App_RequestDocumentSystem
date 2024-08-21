@@ -16,9 +16,10 @@ table 70829615 PPHRDS_ReqHeader
             begin
                 if "No." <> xRec."No." then begin
                     GetRequestSetup();
-                    NoSeriesMgt.TestManual(GetNoSeriesCode());
+                    NoSeries.TestManual(GetNoSeriesCode());
                     "No. Series" := '';
                 end;
+
                 ProcessedRequestEntry.Reset();
                 ProcessedRequestEntry.SetRange("Request No.", "No.");
                 if not ProcessedRequestEntry.IsEmpty then
@@ -265,11 +266,7 @@ table 70829615 PPHRDS_ReqHeader
 
     trigger OnInsert();
     begin
-        GetRequestSetup();
-        TestNoSeries();
-        if "No." = '' then
-            NoSeriesMgt.InitSeries(GetNoSeriesCode(), xRec."No. Series", "Request Date", "No.", "No. Series");
-        InitRecord();
+        InitInsert();
     end;
 
     trigger OnRename()
@@ -279,12 +276,11 @@ table 70829615 PPHRDS_ReqHeader
 
     var
         RequestSetup: Record PPHRDS_ReqDocSysSetup;
-        ReqHeader: Record PPHRDS_ReqHeader;
         ReqLine: Record PPHRDS_ReqLine;
         xReqLine: Record PPHRDS_ReqLine;
         User: Record User;
         RequestCode: Record PPHRDS_RequestCode;
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeries: Codeunit "No. Series";
         DimMgt: Codeunit DimensionManagement;
         ChangedDimQst: Label 'You may have changed a dimension.\\Do you want to update the lines?';
         RequestApprovalMgt: Codeunit PPHRDS_RequestApprovalMgt;
@@ -294,8 +290,23 @@ table 70829615 PPHRDS_ReqHeader
         TransferFromErr: Label 'The Transfer-from Code in Request Code %1 must be different from Location Code %2.', Comment = '%1 = Request Code, %2 Location Code';
         RenameKeyErr: Label 'You cannot rename a %1.', Comment = '%1 = Table Name';
 
+    procedure InitInsert()
+    begin
+        if "No." = '' then begin
+            TestNoSeries();
+            "No. Series" := GetNoSeriesCode();
+            if NoSeries.AreRelated("No. Series", xRec."No. Series") then
+                "No. Series" := xRec."No. Series";
+            "No." := NoSeries.GetNextNo("No. Series", WorkDate())
+        end;
+
+        InitRecord();
+    end;
+
     procedure InitRecord();
     begin
+        GetRequestSetup();
+
         Validate("Requestor ID", UserId);
 
         if "Request Date" = 0D then
@@ -307,25 +318,30 @@ table 70829615 PPHRDS_ReqHeader
 
     procedure AssistEdit(OldReqHeader: Record PPHRDS_ReqHeader): Boolean;
     begin
-        ReqHeader := Rec;
         GetRequestSetup();
         TestNoSeries();
-        if NoSeriesMgt.SelectSeries(GetNoSeriesCode(), OldReqHeader."No. Series", "No. Series") then begin
-            NoSeriesMgt.SetSeries(ReqHeader."No.");
-            Rec := ReqHeader;
+        if NoSeries.LookupRelatedNoSeries(GetNoSeriesCode(), OldReqHeader."No. Series", "No. Series") then begin
+            "No." := NoSeries.GetNextNo("No. Series");
             exit(true);
         end;
     end;
 
     local procedure TestNoSeries();
     begin
+        GetRequestSetup();
         RequestSetup.TestField("Request Nos.");
         RequestSetup.TestField("Processed Request Nos.");
     end;
 
     local procedure GetNoSeriesCode(): Code[10];
     begin
+        GetRequestSetup();
         exit(RequestSetup."Request Nos.");
+    end;
+
+    local procedure GetRequestSetup();
+    begin
+        RequestSetup.Get();
     end;
 
     procedure ReqLinesExist(): Boolean;
@@ -412,11 +428,6 @@ table 70829615 PPHRDS_ReqHeader
             Modify();
             UpdateAllLineDim("Dimension Set ID", OldDimSetID);
         end;
-    end;
-
-    local procedure GetRequestSetup();
-    begin
-        RequestSetup.Get();
     end;
 
     local procedure UpdateReqLines(ChangedFieldName: Text; AskQuestion: Boolean);

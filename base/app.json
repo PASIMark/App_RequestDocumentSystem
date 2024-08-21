@@ -20,7 +20,7 @@
   ],
   "screenshots": [],
   "platform": "1.0.0.0",
-  "application": "20.0.0.0",
+  "application": "24.0.0.0",
   "idRanges": [
     {
       "from": 70829575,
@@ -34,7 +34,7 @@
     "includeSourceInSymbolFile": false
   },
   "applicationInsightsConnectionString": "InstrumentationKey=d4e1ec44-df40-44a2-a846-6c9865da1db3;IngestionEndpoint=https://southeastasia-1.in.applicationinsights.azure.com/",
-  "runtime": "9.0",
+  "runtime": "10.0",
   "features": ["TranslationFile"],
   "target": "Cloud"
 }
