@@ -786,7 +786,13 @@ table 70829616 PPHRDS_ReqLine
     local procedure UpdateDirectUnitCost(CalledByFieldNo: Integer);
     var
         TempRequisitionLine: Record "Requisition Line" temporary;
+        IsHandled: Boolean;
     begin
+        IsHandled := false;
+        OnBeforeUpdateDirectUnitCost(CalledByFieldNo, CurrFieldNo, Rec, IsHandled);
+        if IsHandled then
+            exit;
+
         if (CurrFieldNo <> 0) then
             UpdateAmounts();
 
@@ -810,11 +816,16 @@ table 70829616 PPHRDS_ReqLine
                 TempRequisitionLine.Validate("Order Date", "Expected Receipt Date");
             if "Currency Code" <> '' then
                 TempRequisitionLine.Validate("Currency Code", "Currency Code");
+
+            OnBeforeUpdateDirectUnitCostValue(TempRequisitionLine, Rec);
             if "Request Type" in ["Request Type"::Purchase, "Request Type"::"Item Journal", "Request Type"::"Req. Worksheet"] then
                 Validate("Direct Unit Cost", TempRequisitionLine."Direct Unit Cost")
             else
                 Validate("Direct Unit Cost", 0);
+            OnAfterUpdateDirectUnitCostValue(TempRequisitionLine, Rec);
         end;
+
+        OnAfterUpdateDirectUnitCost(CalledByFieldNo, CurrFieldNo, Rec);
     end;
 
     procedure UpdateAmounts();
@@ -1106,6 +1117,28 @@ table 70829616 PPHRDS_ReqLine
     [IntegrationEvent(false, false)]
     local procedure OnAfterUpdateAmounts(var ReqLine: Record PPHRDS_ReqLine; var xReqLine: Record PPHRDS_ReqLine);
     begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeUpdateDirectUnitCost(CalledByFieldNo: Integer; CurrFieldNo: Integer; var ReqLine: Record PPHRDS_ReqLine; var IsHandled: Boolean);
+    begin
+
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeUpdateDirectUnitCostValue(var TempRequisitionLine: Record "Requisition Line" temporary; var ReqLine: Record PPHRDS_ReqLine);
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterUpdateDirectUnitCostValue(var TempRequisitionLine: Record "Requisition Line" temporary; var ReqLine: Record PPHRDS_ReqLine);
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterUpdateDirectUnitCost(CalledByFieldNo: Integer; CurrFieldNo: Integer; var ReqLine: Record PPHRDS_ReqLine);
+    begin
+
     end;
 }
 
