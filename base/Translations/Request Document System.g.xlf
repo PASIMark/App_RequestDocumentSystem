@@ -1108,6 +1108,21 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_RequestCode - Field Entry Type - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 136666066 - Field 3421121414 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General Journal Account No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_RequestCode - Field Gen. Jnl. Account No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 136666066 - Field 797425439 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General Journal Account Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_RequestCode - Field Gen. Jnl. Account Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 136666066 - Field 664884197 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General Journal Document Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_RequestCode - Field Gen. Jnl. Document Type - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 136666066 - Field 2139693550 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Gen. Prod. Posting Group</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -1377,6 +1392,11 @@
           <source>PREQ999999</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Codeunit PPHRDS_RequestManagement - Method CreateReqNoSeries - NamedType ProcREQSEndNoTxt</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 1100808300 - Method 2974781060 - NamedType 3613954468" size-unit="char" translate="yes" xml:space="preserve">
+          <source>GENERAL</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PPHRDS_RequestManagement - Method CreateRequestCode - NamedType DefGeneralJournalTemplateTxt</note>
         </trans-unit>
         <trans-unit id="Codeunit 1100808300 - Method 2974781060 - NamedType 2907625504" size-unit="char" translate="yes" xml:space="preserve">
           <source>PAYMENT</source>
@@ -3492,6 +3512,41 @@
           <source>General Journal</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestCodeCard - Control General Journal - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2018776222 - Control 795549906 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source></source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestCodeCard - Control General Journal Account - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2018776222 - Control 3421121414 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the General Journal Account No..</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestCodeCard - Control Gen. Jnl. Account No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2018776222 - Control 3421121414 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Account No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestCodeCard - Control Gen. Jnl. Account No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2018776222 - Control 797425439 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the General Journal Account Type.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestCodeCard - Control Gen. Jnl. Account Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2018776222 - Control 797425439 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Account Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestCodeCard - Control Gen. Jnl. Account Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2018776222 - Control 664884197 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the General Journal Document Type.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestCodeCard - Control Gen. Jnl. Document Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2018776222 - Control 664884197 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Document Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestCodeCard - Control Gen. Jnl. Document Type - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 2018776222 - Control 3684440170 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the Journal Template Name.</source>
