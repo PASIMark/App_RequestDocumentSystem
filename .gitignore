@@ -1,5 +1,10 @@
 *.app
-.alpackages
-.snapshot
-.snapshots
-rad.json
+**/launch.json
+**/rad.json
+**/*.g.xlf
+**/*.rad
+*/.alcache/*
+*/.altemplates/*
+*/.vscode/*
+*.rar
+
