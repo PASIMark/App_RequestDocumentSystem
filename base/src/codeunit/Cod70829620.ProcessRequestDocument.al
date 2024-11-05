@@ -964,9 +964,11 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
 
     local procedure CreateGenJournalLine(ReqLine: Record PPHRDS_ReqLine; TemplateName: Code[10]; BatchName: Code[10]; var parGenJournalLine: Record "Gen. Journal Line"; var SysId: Guid);
     var
+        GenJournalTemplate: Record "Gen. Journal Template";
         GenJournalLine: Record "Gen. Journal Line";
     begin
         RequestCode.Get(ReqLine."Request Code");
+        GenJournalTemplate.Get(RequestCode."Journal Template Name");
 
         GenJournalLine.Reset();
         GenJournalLine.SetRange("Journal Template Name", TemplateName);
@@ -985,15 +987,35 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         CreateGenJournalLineOnBeforeInsert(ReqLine, parGenJournalLine);
         parGenJournalLine.Insert(true);
         SysId := parGenJournalLine.SystemId;
+
+        case GenJournalTemplate.Type of
+            GenJournalTemplate.Type::General:
+                begin
+                    parGenJournalLine.Validate("Document Type", RequestCode."Gen. Jnl. Document Type");
+                    parGenJournalLine.Validate("Account Type", RequestCode."Gen. Jnl. Account Type");
+                    parGenJournalLine.Validate("Account No.", RequestCode."Gen. Jnl. Account No.");
+                    case ReqLine.Type of
+                        ReqLine.Type::Vendor:
+                            parGenJournalLine.Validate("Bal. Account Type", parGenJournalLine."Account Type"::Vendor);
+                        ReqLine.Type::Employee:
+                            parGenJournalLine.Validate("Bal. Account Type", parGenJournalLine."Account Type"::Employee);
+                    end;
+                    parGenJournalLine.Validate("Bal. Account No.", ReqLine."No.");
+                end;
+            GenJournalTemplate.Type::Payments:
+                begin
+                    case ReqLine.Type of
+                        ReqLine.Type::Vendor:
+                            parGenJournalLine.Validate("Account Type", parGenJournalLine."Account Type"::Vendor);
+                        ReqLine.Type::Employee:
+                            parGenJournalLine.Validate("Account Type", parGenJournalLine."Account Type"::Employee);
+                    end;
+                    parGenJournalLine.Validate("Account No.", ReqLine."No.");
+                end;
+        end;
+
         if parGenJournalLine."Document No." = '' then
             parGenJournalLine.Validate("Document No.", ReqLine."Document No.");
-        case ReqLine.Type of
-            ReqLine.Type::Vendor:
-                parGenJournalLine.Validate("Account Type", parGenJournalLine."Account Type"::Vendor);
-            ReqLine.Type::Employee:
-                parGenJournalLine.Validate("Account Type", parGenJournalLine."Account Type"::Employee);
-        end;
-        parGenJournalLine.Validate("Account No.", ReqLine."No.");
         parGenJournalLine.Description := ReqLine.Description;
         parGenJournalLine.Validate(Quantity, ReqLine."Qty. to Process");
         parGenJournalLine.Validate(Amount, ReqLine."Direct Unit Cost" * ReqLine."Qty. to Process");
