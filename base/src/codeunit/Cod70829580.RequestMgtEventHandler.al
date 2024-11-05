@@ -192,6 +192,9 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
 
     [EventSubscriber(ObjectType::Table, Database::"Gen. Journal Line", 'OnBeforeModifyEvent', '', false, false)]
     local procedure OnModifyGenJournalLine(var Rec: Record "Gen. Journal Line"; var xRec: Record "Gen. Journal Line"; RunTrigger: Boolean);
+    var
+        GenJournalTemplate: Record "Gen. Journal Template";
+        RequestCode: Record PPHRDS_RequestCode;
     begin
         if not RunTrigger then
             exit;
@@ -199,15 +202,47 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         if IsNullGuid(Rec.SystemId) then
             exit;
 
-        if (xRec."Document No." = Rec."Document No.") and
-            (xRec."Account Type" = Rec."Account Type") and
-            (xRec."Account No." = Rec."Account No.") and
-            (xRec.Quantity = Rec.Quantity)
-        then
+        if not RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
             exit;
 
-        if RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
-            Error(LineNoAssignedToReqErr, Rec."Line No.", ProcessedRequestEntry."Request No.");
+        RequestCode.Get(ProcessedRequestEntry."Request Code");
+        GenJournalTemplate.Get(RequestCode."Journal Template Name");
+
+        // if (xRec.Amount = Rec.Amount) and
+        //     (xRec."Amount (LCY)" = Rec."Amount (LCY)")
+        // then
+        //     AllowGenJnlAmtChange := true
+        // else
+        //     AllowGenJnlAmtChange := RequestCode."Allow Editing Amount";
+
+        case GenJournalTemplate.Type of
+            GenJournalTemplate.Type::General:
+                if RequestCode."Gen. Jnl. Account No." = '' then begin
+                    if (xRec."Document No." = Rec."Document No.") and
+                        (xRec."Bal. Account Type" = Rec."Bal. Account Type") and
+                        (xRec."Bal. Account No." = Rec."Bal. Account No.") and
+                        (xRec.Quantity = Rec.Quantity)
+                    then
+                        exit;
+                end else
+                    if (xRec."Document No." = Rec."Document No.") and
+                        (xRec."Account Type" = Rec."Account Type") and
+                        (xRec."Account No." = Rec."Account No.") and
+                        (xRec."Bal. Account Type" = Rec."Bal. Account Type") and
+                        (xRec."Bal. Account No." = Rec."Bal. Account No.") and
+                        (xRec.Quantity = Rec.Quantity)
+                    then
+                        exit;
+            GenJournalTemplate.Type::Payments:
+                if (xRec."Document No." = Rec."Document No.") and
+                    (xRec."Account Type" = Rec."Account Type") and
+                    (xRec."Account No." = Rec."Account No.") and
+                    (xRec.Quantity = Rec.Quantity)
+                then
+                    exit;
+        end;
+
+        Error(LineNoAssignedToReqErr, Rec."Line No.", ProcessedRequestEntry."Request No.");
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Purchase Line", 'OnAfterDeleteEvent', '', false, false)]

@@ -178,6 +178,41 @@ page 70829586 PPHRDS_RequestCodeCard
                 {
                     Tooltip = 'Specifies the Journal Template Name.';
                     ApplicationArea = All;
+
+                    trigger OnValidate()
+                    begin
+                        SetupVisibility();
+                    end;
+                }
+                // field("Allow Editing Amount"; Rec."Allow Editing Amount")
+                // {
+                //     Tooltip = 'Specifies the Allow Editing Amount.';
+                //     ApplicationArea = All;
+                //     Importance = Additional;
+                // }
+                group("General Journal Account")
+                {
+                    Caption = '';
+                    ShowCaption = false;
+                    Visible = GenJnlAccVisible;
+                    field("Gen. Jnl. Document Type"; Rec."Gen. Jnl. Document Type")
+                    {
+                        Caption = 'Document Type';
+                        Tooltip = 'Specifies the General Journal Document Type.';
+                        ApplicationArea = All;
+                    }
+                    field("Gen. Jnl. Account Type"; Rec."Gen. Jnl. Account Type")
+                    {
+                        Caption = 'Account Type';
+                        Tooltip = 'Specifies the General Journal Account Type.';
+                        ApplicationArea = All;
+                    }
+                    field("Gen. Jnl. Account No."; Rec."Gen. Jnl. Account No.")
+                    {
+                        Caption = 'Account No.';
+                        Tooltip = 'Specifies the General Journal Account No..';
+                        ApplicationArea = All;
+                    }
                 }
             }
             // group("Req. Worksheet")
@@ -235,8 +270,11 @@ page 70829586 PPHRDS_RequestCodeCard
         PurchOrderNosVisible: Boolean;
         PurchInvoiceNosVisible: Boolean;
         GenJnlVisible: Boolean;
+        GenJnlAccVisible: Boolean;
 
     local procedure SetupVisibility();
+    var
+        GenJournalTemplate: Record "Gen. Journal Template";
     begin
         PurchaseSetupVisible := false;
         TransferOrderSetupVisible := false;
@@ -245,6 +283,7 @@ page 70829586 PPHRDS_RequestCodeCard
         PurchOrderNosVisible := false;
         PurchInvoiceNosVisible := false;
         GenJnlVisible := false;
+        GenJnlAccVisible := false;
 
         case Rec.Type of
             Rec.Type::Purchase:
@@ -254,17 +293,11 @@ page 70829586 PPHRDS_RequestCodeCard
             Rec.Type::"Item Journal":
                 ItemJournalSetupVisible := true;
             rec.Type::"General Journal":
-                GenJnlVisible := true;
+                begin
+                    GenJnlVisible := true;
+                    GenJnlAccVisible := GenJournalTemplate.Get(Rec."Journal Template Name") and (GenJournalTemplate.Type = GenJournalTemplate.Type::General);
+                end;
         end;
-
-        // case Rec."Purchase Document Type" of
-        //     Rec."Purchase Document Type"::Quote:
-        //         PurchQuoteNosVisible := true;
-        //     Rec."Purchase Document Type"::Order:
-        //         PurchOrderNosVisible := true;
-        //     Rec."Purchase Document Type"::Invoice:
-        //         PurchInvoiceNosVisible := true;
-        // end;
     end;
 }
 

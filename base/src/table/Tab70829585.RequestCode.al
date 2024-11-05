@@ -103,6 +103,37 @@ table 70829585 "PPHRDS_RequestCode"
             Caption = 'Journal Batch Name';
             TableRelation = if (Type = const("General Journal")) "Gen. Journal Batch".Name WHERE("Journal Template Name" = FIELD("Journal Template Name"));
         }
+        field(63; "Gen. Jnl. Document Type"; Enum "Gen. Journal Document Type")
+        {
+            DataClassification = CustomerContent;
+            Caption = 'General Journal Document Type';
+        }
+        field(64; "Gen. Jnl. Account Type"; Enum "Gen. Journal Account Type")
+        {
+            DataClassification = CustomerContent;
+            Caption = 'General Journal Account Type';
+        }
+        field(65; "Gen. Jnl. Account No."; Code[20])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'General Journal Account No.';
+            TableRelation = if ("Gen. Jnl. Account Type" = const("G/L Account")) "G/L Account" where("Account Type" = const(Posting),
+                                                                                          Blocked = const(false), "Direct Posting" = const(true))
+            else
+            if ("Gen. Jnl. Account Type" = const(Customer)) Customer
+            else
+            if ("Gen. Jnl. Account Type" = const(Vendor)) Vendor
+            else
+            if ("Gen. Jnl. Account Type" = const("Bank Account")) "Bank Account"
+            else
+            if ("Gen. Jnl. Account Type" = const("Fixed Asset")) "Fixed Asset"
+            else
+            if ("Gen. Jnl. Account Type" = const("IC Partner")) "IC Partner"
+            else
+            if ("Gen. Jnl. Account Type" = const("Allocation Account")) "Allocation Account"
+            else
+            if ("Gen. Jnl. Account Type" = const(Employee)) Employee;
+        }
         field(66; "Entry Type"; Enum PPHRDS_RequestEntryType)
         {
             DataClassification = CustomerContent;
@@ -120,6 +151,11 @@ table 70829585 "PPHRDS_RequestCode"
             Caption = 'Location Code';
             TableRelation = Location.Code WHERE("Use As In-Transit" = CONST(false));
         }
+        // field(271; "Allow Editing Amount"; Boolean)
+        // {
+        //     DataClassification = CustomerContent;
+        //     Caption = 'Allow Editing Amount';
+        // }
         field(300; Active; Boolean)
         {
             DataClassification = CustomerContent;
@@ -152,6 +188,11 @@ table 70829585 "PPHRDS_RequestCode"
     fieldgroups
     {
     }
+
+    trigger OnDelete()
+    begin
+        TestField(Active, false);
+    end;
 
     local procedure GetLocationName(parLocationCode: Code[10]): Text[100];
     var
