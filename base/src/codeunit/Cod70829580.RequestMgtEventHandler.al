@@ -582,4 +582,16 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         ProcessedRequestEntry.SetRange(Status, ProcessedRequestEntry.Status::Processed);
         exit(ProcessedRequestEntry.FindFirst());
     end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Document Attachment Mgmt", OnAfterTableHasNumberFieldPrimaryKey, '', false, false)]
+    local procedure OnAfterSetDocumentAttachmentFiltersForRecRefInternal(var FieldNo: Integer; TableNo: Integer; var Result: Boolean)
+    var
+        ReqHeader: Record PPHRDS_ReqHeader;
+    begin
+        if TableNo <> Database::PPHRDS_ReqHeader then
+            exit;
+
+        FieldNo := 1;
+        Result := true;
+    end;
 }
