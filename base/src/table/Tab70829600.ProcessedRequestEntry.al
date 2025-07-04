@@ -133,6 +133,14 @@ table 70829600 PPHRDS_ProcessedRequestEntry
             Caption = 'Location Code';
             TableRelation = Location WHERE("Use As In-Transit" = CONST(false));
         }
+        field(36; "Variant Code"; Code[10])
+        {
+            Caption = 'Variant Code';
+            DataClassification = CustomerContent;
+            TableRelation = if (Type = const(Item)) "Item Variant".Code where("Item No." = field("No."), Blocked = const(false), "Purchasing Blocked" = const(false))
+            else
+            if (Type = const(Item)) "Item Variant".Code where("Item No." = field("No."), Blocked = const(false));
+        }
         field(37; "Unit of Measure"; Text[50])
         {
             DataClassification = CustomerContent;

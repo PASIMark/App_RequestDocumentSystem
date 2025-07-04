@@ -185,6 +185,14 @@ table 70829636 PPHRDS_ProcessedReqLine
             Caption = 'Job Task No.';
             TableRelation = "Job Task"."Job Task No." WHERE("Job No." = FIELD("Job No."));
         }
+        field(5402; "Variant Code"; Code[10])
+        {
+            Caption = 'Variant Code';
+            DataClassification = CustomerContent;
+            TableRelation = if (Type = const(Item)) "Item Variant".Code where("Item No." = field("No."), Blocked = const(false), "Purchasing Blocked" = const(false))
+            else
+            if (Type = const(Item)) "Item Variant".Code where("Item No." = field("No."), Blocked = const(false));
+        }
         field(5404; "Qty. per Unit of Measure"; Decimal)
         {
             DataClassification = CustomerContent;
