@@ -35,6 +35,13 @@ page 70829616 PPHRDS_RequestSubform
                         Rec.ShowShortcutDimCode(ShortcutDimCode);
                     end;
                 }
+                field("Variant Code"; Rec."Variant Code")
+                {
+                    ToolTip = 'Specifies the Variant Code.';
+                    ApplicationArea = All;
+                    StyleExpr = BudgetStyleExpression;
+                    Visible = false;
+                }
                 field(Description; Rec.Description)
                 {
                     Tooltip = 'Specifies the Description.';
