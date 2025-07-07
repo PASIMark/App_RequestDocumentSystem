@@ -3,6 +3,7 @@ page 70829651 PPHRDS_ReqDocActivities
     Caption = 'Activities';
     PageType = CardPart;
     SourceTable = PPHRDS_RequestDocumentCue;
+    RefreshOnActivate = true;
 
     layout
     {
