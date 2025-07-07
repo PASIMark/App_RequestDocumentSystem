@@ -66,6 +66,11 @@ page 70829616 PPHRDS_RequestSubform
                     ApplicationArea = All;
                     ShowMandatory = TypeChosen;
                     StyleExpr = BudgetStyleExpression;
+
+                    trigger OnValidate()
+                    begin
+                        SetBudgetReqLine();
+                    end;
                 }
                 field("Unit of Measure Code"; Rec."Unit of Measure Code")
                 {
@@ -79,6 +84,11 @@ page 70829616 PPHRDS_RequestSubform
                     ApplicationArea = All;
                     ShowMandatory = TypeChosen;
                     StyleExpr = BudgetStyleExpression;
+
+                    trigger OnValidate()
+                    begin
+                        SetBudgetReqLine();
+                    end;
                 }
                 field("Line Amount"; Rec."Line Amount")
                 {
@@ -108,11 +118,21 @@ page 70829616 PPHRDS_RequestSubform
                 {
                     Tooltip = 'Specifies the Expected Receipt Date.';
                     ApplicationArea = All;
+
+                    trigger OnValidate()
+                    begin
+                        SetBudgetReqLine();
+                    end;
                 }
                 field("Request Code"; Rec."Request Code")
                 {
                     Tooltip = 'Specifies the Request Code.';
                     ApplicationArea = All;
+
+                    trigger OnValidate()
+                    begin
+                        SetBudgetReqLine();
+                    end;
                 }
                 field("Currency Code"; Rec."Currency Code")
                 {
@@ -154,11 +174,21 @@ page 70829616 PPHRDS_RequestSubform
                 {
                     Tooltip = 'Specifies the Shortcut Dimension 1 Code.';
                     ApplicationArea = All;
+
+                    trigger OnValidate()
+                    begin
+                        SetBudgetReqLine();
+                    end;
                 }
                 field("Shortcut Dimension 2 Code"; Rec."Shortcut Dimension 2 Code")
                 {
                     Tooltip = 'Specifies the Shortcut Dimension 2 Code.';
                     ApplicationArea = All;
+
+                    trigger OnValidate()
+                    begin
+                        SetBudgetReqLine();
+                    end;
                 }
                 field("ShortcutDimCode[3]"; ShortcutDimCode[3])
                 {
@@ -304,14 +334,7 @@ page 70829616 PPHRDS_RequestSubform
 
     trigger OnAfterGetCurrRecord();
     begin
-        TotalBudgetValue := 0;
-        TotalActualValue := 0;
-        TotalReleasedValue := 0;
-        TotalPurchaseValue := 0;
-        TotalAvailableValue := 0;
-        RequestBudgetManagement.GetBudgetDetails(Rec, TotalBudgetValue, TotalActualValue, TotalReleasedValue, TotalPurchaseValue, TotalAvailableValue, BudgetExist, IsOverBudget);
-
-        ControlAppearance();
+        SetBudgetReqLine();
     end;
 
     trigger OnAfterGetRecord();
@@ -319,14 +342,7 @@ page 70829616 PPHRDS_RequestSubform
         Rec.ShowShortcutDimCode(ShortcutDimCode);
         TypeChosen := Rec.HasTypeToFillMandatotyFields();
 
-        TotalBudgetValue := 0;
-        TotalActualValue := 0;
-        TotalReleasedValue := 0;
-        TotalPurchaseValue := 0;
-        TotalAvailableValue := 0;
-        RequestBudgetManagement.GetBudgetDetails(Rec, TotalBudgetValue, TotalActualValue, TotalReleasedValue, TotalPurchaseValue, TotalAvailableValue, BudgetExist, IsOverBudget);
-
-        ControlAppearance();
+        SetBudgetReqLine();
     end;
 
     trigger OnNewRecord(BelowxRec: Boolean);
@@ -361,6 +377,18 @@ page 70829616 PPHRDS_RequestSubform
             BudgetStyleExpression := 'Unfavorable'
         else
             BudgetStyleExpression := 'Standard';
+    end;
+
+    local procedure SetBudgetReqLine()
+    begin
+        TotalBudgetValue := 0;
+        TotalActualValue := 0;
+        TotalReleasedValue := 0;
+        TotalPurchaseValue := 0;
+        TotalAvailableValue := 0;
+        RequestBudgetManagement.GetBudgetDetails(Rec, TotalBudgetValue, TotalActualValue, TotalReleasedValue, TotalPurchaseValue, TotalAvailableValue, BudgetExist, IsOverBudget);
+
+        ControlAppearance();
     end;
 }
 
