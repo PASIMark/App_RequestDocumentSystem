@@ -815,6 +815,10 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         parPurchaseLine.Validate(Type, RequestManagement.LineReqTypeToPurchType(ReqLine.Type));
         parPurchaseLine.Validate("No.", ReqLine."No.");
         parPurchaseLine.Validate("Location Code", ReqLine."Location Code");
+
+        if ReqLine."Variant Code" <> '' then
+            parPurchaseLine.Validate("Variant Code", ReqLine."Variant Code");
+
         parPurchaseLine.Validate(Quantity, ReqLine."Qty. to Process");
         parPurchaseLine.Validate("Unit of Measure Code", ReqLine."Unit of Measure Code");
         parPurchaseLine.Validate("Direct Unit Cost", ReqLine."Direct Unit Cost");
@@ -867,6 +871,10 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         parTransferLine.Insert(true);
         SysId := parTransferLine.SystemId;
         parTransferLine.Validate("Item No.", ReqLine."No.");
+
+        if ReqLine."Variant Code" <> '' then
+            parTransferLine.Validate("Variant Code", ReqLine."Variant Code");
+
         parTransferLine.Validate(Quantity, ReqLine."Qty. to Process");
         parTransferLine.Validate("Unit of Measure Code", ReqLine."Unit of Measure Code");
         parTransferLine.Description := ReqLine.Description;
@@ -904,6 +912,10 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         parItemJournalLine.Validate("Entry Type", RequestCode."Entry Type");
         parItemJournalLine.Validate("Item No.", ReqLine."No.");
         parItemJournalLine.Description := ReqLine.Description;
+
+        if ReqLine."Variant Code" <> '' then
+            parItemJournalLine.Validate("Variant Code", ReqLine."Variant Code");
+
         parItemJournalLine.Validate(Quantity, ReqLine."Qty. to Process");
         parItemJournalLine.Validate("Unit of Measure Code", ReqLine."Unit of Measure Code");
         parItemJournalLine.Validate("Location Code", ReqLine."Location Code");
@@ -1074,6 +1086,7 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         parProcessedRequestEntry."Request Type" := ReqLine."Request Type";
         parProcessedRequestEntry.Type := ReqLine.Type;
         parProcessedRequestEntry."No." := ReqLine."No.";
+        parProcessedRequestEntry."Variant Code" := ReqLine."Variant Code";
         parProcessedRequestEntry.Description := ReqLine.Description;
         parProcessedRequestEntry."Description 2" := ReqLine."Description 2";
         parProcessedRequestEntry."Location Code" := ReqLine."Location Code";

@@ -119,6 +119,12 @@ page 70829600 PPHRDS_ProcessedRequestEntries
                     Tooltip = 'Specifies the No..';
                     ApplicationArea = All;
                 }
+                field("Variant Code"; Rec."Variant Code")
+                {
+                    Tooltip = 'Specifies the Variant Code.';
+                    ApplicationArea = All;
+                    Visible = false;
+                }
                 field(Description; Rec.Description)
                 {
                     Tooltip = 'Specifies the Description.';

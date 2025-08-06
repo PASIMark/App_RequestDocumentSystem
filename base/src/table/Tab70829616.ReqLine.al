@@ -477,6 +477,38 @@ table 70829616 PPHRDS_ReqLine
             Caption = 'Job Task No.';
             TableRelation = "Job Task"."Job Task No." WHERE("Job No." = FIELD("Job No."));
         }
+        field(5402; "Variant Code"; Code[10])
+        {
+            Caption = 'Variant Code';
+            DataClassification = CustomerContent;
+            TableRelation = if (Type = const(Item)) "Item Variant".Code where("Item No." = field("No."), Blocked = const(false), "Purchasing Blocked" = const(false))
+            else
+            if (Type = const(Item)) "Item Variant".Code where("Item No." = field("No."), Blocked = const(false));
+
+            trigger OnValidate()
+            var
+                ItemVariant: Record "Item Variant";
+                RequestTypeErr: Label 'Request Type can only be either Purchase, Transfer Order or Item Journal';
+            begin
+                Rec.TestField(Type, Rec.Type::Item);
+
+                if Rec."Variant Code" = '' then
+                    exit;
+
+                if not (Rec."Request Type" in [Rec."Request Type"::Purchase, Rec."Request Type"::"Transfer Order", Rec."Request Type"::"Item Journal"]) then
+                    Error(RequestTypeErr);
+
+                ItemVariant.SetLoadFields("Purchasing Blocked");
+                ItemVariant.Get(Rec."No.", Rec."Variant Code");
+                if Rec."Request Type" = Rec."Request Type"::Purchase then
+                    ItemVariant.Testfield("Purchasing Blocked", false);
+
+                TestStatusOpen();
+
+                if xRec."Variant Code" <> Rec."Variant Code" then
+                    TestField("Quantity Processed", 0);
+            end;
+        }
         field(5404; "Qty. per Unit of Measure"; Decimal)
         {
             DataClassification = CustomerContent;
@@ -1113,6 +1145,15 @@ table 70829616 PPHRDS_ReqLine
             PAGE.Run(PAGE::"Items by Location", Item);
         end;
     end;
+
+    local procedure GetLineWithCalculatedPrice(var PriceCalculation: Interface "Price Calculation")
+    var
+        Line: Variant;
+    begin
+        PriceCalculation.GetLine(Line);
+        Rec := Line;
+    end;
+
 
     [IntegrationEvent(false, false)]
     local procedure OnAfterUpdateAmounts(var ReqLine: Record PPHRDS_ReqLine; var xReqLine: Record PPHRDS_ReqLine);
