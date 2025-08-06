@@ -70,7 +70,7 @@ table 70829636 PPHRDS_ProcessedReqLine
             DataClassification = CustomerContent;
             Caption = 'Description 2';
         }
-        field(13; "Unit of Measure"; Text[10])
+        field(13; "Unit of Measure"; Text[50])
         {
             DataClassification = CustomerContent;
             Caption = 'Unit of Measure';
@@ -169,7 +169,7 @@ table 70829636 PPHRDS_ProcessedReqLine
             Caption = 'Vendor No.';
             TableRelation = Vendor;
         }
-        field(502; "Vendor Name"; Text[50])
+        field(502; "Vendor Name"; Text[100])
         {
             DataClassification = CustomerContent;
             Caption = 'Vendor Name';

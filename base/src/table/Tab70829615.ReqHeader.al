@@ -134,7 +134,7 @@ table 70829615 PPHRDS_ReqHeader
                 CheckLocation();
             end;
         }
-        field(43; "Purchaser Code"; Code[10])
+        field(43; "Purchaser Code"; Code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Purchaser Code';
