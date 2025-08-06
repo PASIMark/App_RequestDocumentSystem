@@ -35,6 +35,7 @@ codeunit 70829575 "PPHRDS_RequestManagement"
     var
         RequestCode: Record PPHRDS_RequestCode;
         GenJournalTemplate: Record "Gen. Journal Template";
+        DefGeneralJournalTemplateTxt: Label 'GENERAL';
         DefPaymentJournalTemplateTxt: Label 'PAYMENT';
     begin
         // Create Request Code
@@ -96,7 +97,7 @@ codeunit 70829575 "PPHRDS_RequestManagement"
         RequestCode.Validate(Code, 'CASHADVANCE');
         RequestCode.Validate(Description, 'Cash Advance');
         RequestCode.Validate(Type, RequestCode.Type::"General Journal");
-        if GenJournalTemplate.Get(DefPaymentJournalTemplateTxt) then begin
+        if GenJournalTemplate.Get(DefGeneralJournalTemplateTxt) then begin
             RequestCode.Validate("Journal Template Name", GenJournalTemplate.Name);
             RequestCode.Validate(Active, true);
         end;
