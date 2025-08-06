@@ -459,6 +459,19 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         ReqDocSysTempStorage.SetJnlTemplateAndBatchName(GenJournalLine."Journal Template Name", GenJournalLine."Journal Batch Name");
     end;
 
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"Notification Management", 'OnGetDocumentTypeAndNumber', '', false, false)]
+    local procedure NotificationManagementOnGetDocumentTypeAndNumber(var RecRef: RecordRef; var DocumentType: Text; var DocumentNo: Text; var IsHandled: Boolean)
+    var
+        FieldRef: FieldRef;
+    begin
+        if RecRef.Number = Database::PPHRDS_ReqHeader then begin
+            DocumentType := RecRef.Caption;
+            FieldRef := RecRef.Field(1);
+            DocumentNo := Format(FieldRef.Value);
+            IsHandled := true;
+        end;
+    end;
+
     local procedure CheckReqWkshHasUsageRestrictions(RequisitionLine: Record "Requisition Line");
     var
         locRequisitionLine: Record "Requisition Line";

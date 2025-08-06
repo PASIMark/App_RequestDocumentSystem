@@ -73,6 +73,12 @@ page 70829636 PPHRDS_ProcessedRequestSubform
                     Tooltip = 'Specifies the Request Code.';
                     ApplicationArea = All;
                 }
+                field("Currency Code"; Rec."Currency Code")
+                {
+                    Tooltip = 'Specifies the Currency Code.';
+                    ApplicationArea = All;
+                    Visible = false;
+                }
                 field("Vendor No."; Rec."Vendor No.")
                 {
                     Tooltip = 'Specifies the Vendor No..';

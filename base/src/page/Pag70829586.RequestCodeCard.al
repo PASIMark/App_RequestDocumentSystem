@@ -64,7 +64,7 @@ page 70829586 PPHRDS_RequestCodeCard
                         trigger OnLookup(var Text: Text): Boolean;
                         begin
                             PurchSetup.Get();
-                            NoSeriesMgt.SelectSeries(PurchSetup."Quote Nos.", PurchSetup."Quote Nos.", Rec."Purch. Quote Nos.");
+                            NoSeries.LookupRelatedNoSeries(PurchSetup."Quote Nos.", Rec."Purch. Quote Nos.");
                         end;
                     }
                 }
@@ -80,7 +80,7 @@ page 70829586 PPHRDS_RequestCodeCard
                         trigger OnLookup(var Text: Text): Boolean;
                         begin
                             PurchSetup.Get();
-                            NoSeriesMgt.SelectSeries(PurchSetup."Order Nos.", PurchSetup."Order Nos.", Rec."Purch. Order Nos.");
+                            NoSeries.LookupRelatedNoSeries(PurchSetup."Order Nos.", Rec."Purch. Order Nos.")
                         end;
                     }
                 }
@@ -96,7 +96,7 @@ page 70829586 PPHRDS_RequestCodeCard
                         trigger OnLookup(var Text: Text): Boolean;
                         begin
                             PurchSetup.Get();
-                            NoSeriesMgt.SelectSeries(PurchSetup."Invoice Nos.", PurchSetup."Invoice Nos.", Rec."Purch. Invoice Nos.");
+                            NoSeries.LookupRelatedNoSeries(PurchSetup."Invoice Nos.", Rec."Purch. Invoice Nos.")
                         end;
                     }
                 }
@@ -227,7 +227,7 @@ page 70829586 PPHRDS_RequestCodeCard
 
     var
         PurchSetup: Record "Purchases & Payables Setup";
-        NoSeriesMgt: Codeunit NoSeriesManagement;
+        NoSeries: Codeunit "No. Series";
         PurchaseSetupVisible: Boolean;
         TransferOrderSetupVisible: Boolean;
         ItemJournalSetupVisible: Boolean;
