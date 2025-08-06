@@ -4,10 +4,15 @@
     "rules":
     [
         {
+            "id" : "AD0001",
+            "action" : "Hidden",
+            "justification" : "Disable - Possible bug, could not find the issues to fix"
+        },
+        {
             "id" : "AA0021",
             "action" : "Hidden",
             "justification" : "Disable - Variable declarations should be ordered by type. Variables should be sorted like this: Record, Report, Codeunit, XmlPort, Page, Query, Notification, BigText, DateFormula, RecordId, RecordRef, FieldRef, and FilterPageBuilder. The rest of the variables are not sorted."
-        },        
+        },
         {
             "id" : "AA0072",
             "action" : "Hidden",

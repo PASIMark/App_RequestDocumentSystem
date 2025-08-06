@@ -11,7 +11,7 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         RequestCode: Record PPHRDS_RequestCode;
         ReqHeader: Record PPHRDS_ReqHeader;
         RequestManagement: Codeunit PPHRDS_RequestManagement;
-        NoSeriesManagement: Codeunit NoSeriesManagement;
+        NoSeries: Codeunit "No. Series";
         RequestApprovalMgt: Codeunit PPHRDS_RequestApprovalMgt;
         DimensionManagement: Codeunit DimensionManagement;
         ReqDoc: List of [Text];
@@ -877,9 +877,7 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
 
     local procedure CreateItemJournalLine(ReqLine: Record PPHRDS_ReqLine; TemplateName: Code[10]; BatchName: Code[10]; var parItemJournalLine: Record "Item Journal Line"; var SysId: Guid);
     var
-        ItemJournalBatch: Record "Item Journal Batch";
         ItemJournalLine: Record "Item Journal Line";
-        ItemJnlDocNo: Code[20];
     begin
         RequestCode.Get(ReqLine."Request Code");
 
@@ -891,21 +889,17 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         else
             LineNo := 10000;
 
-        Commit();
-        ItemJournalBatch.Get(TemplateName, BatchName);
-        if ItemJournalBatch."No. Series" <> '' then
-            ItemJnlDocNo := NoSeriesManagement.TryGetNextNo(ItemJournalBatch."No. Series", WorkDate())
-        else
-            ItemJnlDocNo := ReqLine."Document No.";
-
         parItemJournalLine.Init();
         parItemJournalLine.Validate("Journal Template Name", TemplateName);
         parItemJournalLine.Validate("Journal Batch Name", BatchName);
         parItemJournalLine.Validate("Line No.", LineNo);
+        Commit();
+        parItemJournalLine.SetUpNewLine(ItemJournalLine);
         CreateItemJournalLineOnBeforeInsert(ReqLine, parItemJournalLine);
         parItemJournalLine.Insert(true);
         SysId := parItemJournalLine.SystemId;
-        parItemJournalLine.Validate("Document No.", ItemJnlDocNo);
+        if parItemJournalLine."Document No." = '' then
+            parItemJournalLine.Validate("Document No.", ReqLine."Document No.");
         parItemJournalLine.Validate("Posting Date", WorkDate());
         parItemJournalLine.Validate("Entry Type", RequestCode."Entry Type");
         parItemJournalLine.Validate("Item No.", ReqLine."No.");
@@ -1003,6 +997,8 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         parGenJournalLine.Description := ReqLine.Description;
         parGenJournalLine.Validate(Quantity, ReqLine."Qty. to Process");
         parGenJournalLine.Validate(Amount, ReqLine."Direct Unit Cost" * ReqLine."Qty. to Process");
+        if ReqLine."Currency Code" <> '' then
+            parGenJournalLine.Validate("Currency Code", ReqLine."Currency Code");
         parGenJournalLine.Description := ReqLine.Description;
         ReqHeader.Get(ReqLine."Document No.");
         parGenJournalLine.CopyLinks(ReqHeader);
@@ -1066,6 +1062,7 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         parProcessedRequestEntry."Direct Unit Cost" := ReqLine."Direct Unit Cost";
         parProcessedRequestEntry."Unit Cost" := ReqLine."Unit Cost";
         parProcessedRequestEntry."Line Amount" := ReqLine."Line Amount";
+        parProcessedRequestEntry."Currency Code" := ReqLine."Currency Code";
         parProcessedRequestEntry."Job No." := ReqLine."Job No.";
         parProcessedRequestEntry."Job Task No." := ReqLine."Job Task No.";
         parProcessedRequestEntry."Vendor No." := ReqLine."Vendor No.";
@@ -1087,7 +1084,7 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         ProcessedReqHeader.Init();
         ProcessedReqHeader.TransferFields(paReqHeader);
         if RequestSetup."Processed Request Nos." <> '' then
-            ProcessedReqHeader."No." := NoSeriesManagement.GetNextNo(RequestSetup."Processed Request Nos.", WorkDate(), true)
+            ProcessedReqHeader."No." := NoSeries.GetNextNo(RequestSetup."Processed Request Nos.", WorkDate())
         else
             ProcessedReqHeader."No." := paReqHeader."No.";
         ProcessedReqHeader."Request No." := paReqHeader."No.";

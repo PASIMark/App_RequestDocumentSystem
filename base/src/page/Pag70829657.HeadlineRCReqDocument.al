@@ -52,7 +52,6 @@ page 70829657 PPHRDS_HeadlineRCReqDocument
 
     var
         PendReqHdr: Record PPHRDS_ReqHeader;
-        [InDataSet]
         AppNameHeadlineVisible: Boolean;
         FirstInsightText: Text;
         SecondInsightText: Text;

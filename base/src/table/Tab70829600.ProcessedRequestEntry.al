@@ -39,7 +39,7 @@ table 70829600 PPHRDS_ProcessedRequestEntry
             DataClassification = CustomerContent;
             Caption = 'Requestor Name';
         }
-        field(13; "Purchaser Code"; Code[10])
+        field(13; "Purchaser Code"; Code[20])
         {
             DataClassification = CustomerContent;
             Caption = 'Purchaser Code';
