@@ -454,9 +454,11 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         locProcessedReqLine: Record PPHRDS_ProcessedReqLine;
         IsHandled: Boolean;
         ProcReqDocNo: Code[20];
+        ReqDocNo: Code[20];
         Vendors: List of [Text];
         VendorNo: Code[20];
         ProcessedReqDic: Dictionary of [Code[20], Code[20]];
+        ReqDocDic: Dictionary of [Code[20], Code[20]];
         IsHandledApplyDim: Boolean;
     begin
         OnBeforeNewPurchaseDocument(TempReqLine, IsHandled);
@@ -515,7 +517,6 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
                 DimConfictExist := false;
 
                 repeat
-
                     locReqLine.Get(TempReqLine."Document No.", TempReqLine."Line No.");
                     locReqLine.Validate("Vendor No.", TempReqLine."Vendor No.");
                     locReqLine.Validate("Qty. to Process", TempReqLine."Qty. to Process");
@@ -532,6 +533,12 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
                     CreatePurchaseLine(locReqLine, locPurchaseHeader, locPurchaseLine, LineRecSysId);
 
                     ReqHeader.Get(locReqLine."Document No.");
+
+                    if not ReqDocDic.Get(TempReqLine."Document No.", ReqDocNo) then begin
+                        ReqDocDic.Add(TempReqLine."Document No.", TempReqLine."Document No.");
+                        TransferAttachmentOnPurchaseHeaderInsert(locPurchaseHeader, TempReqLine."Document No.");
+                    end;
+
                     InsertRequestLedgerEntry(ReqHeader, locReqLine, locProcessedRequestEntry);
                     locProcessedRequestEntry."Processed Request No." := locProcessedReqLine."Document No.";
                     locProcessedRequestEntry."Processed Request Line No." := locProcessedReqLine."Line No.";
@@ -1230,6 +1237,36 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
             DimensionManagement.UpdateGlobalDimFromDimSetID(GenJournalLine."Dimension Set ID", GenJournalLine."Shortcut Dimension 1 Code", GenJournalLine."Shortcut Dimension 2 Code");
             GenJournalLine.Modify(true);
         end;
+    end;
+
+    local procedure TransferAttachmentOnPurchaseHeaderInsert(pPurchHeader: Record "Purchase Header"; pReqHeaderNo: Code[20])
+    var
+        DocumentAttachment: Record "Document Attachment";
+        DocumentAttachmentCopy: Record "Document Attachment";
+        LastLineNo: Integer;
+    begin
+        DocumentAttachment.Reset();
+        DocumentAttachment.SetRange("Table ID", Database::PPHRDS_ReqHeader);
+        DocumentAttachment.SetRange("No.", pReqHeaderNo);
+        DocumentAttachment.SetRange("Document Type", DocumentAttachment."Document Type"::PPHRDS_Request);
+        if DocumentAttachment.FindSet() then
+            repeat
+                DocumentAttachmentCopy.Validate("Table ID", Database::"Purchase Header");
+                DocumentAttachmentCopy.Validate("No.", pPurchHeader."No.");
+                DocumentAttachmentCopy."Attached Date" := DocumentAttachment."Attached Date";
+                DocumentAttachmentCopy."File Name" := DocumentAttachment."File Name";
+                DocumentAttachmentCopy."File Extension" := DocumentAttachment."File Extension";
+                DocumentAttachmentCopy."Document Reference ID" := DocumentAttachment."Document Reference ID";
+                DocumentAttachmentCopy."Attached By" := DocumentAttachment."Attached By";
+                DocumentAttachmentCopy.User := DocumentAttachment.User;
+                DocumentAttachmentCopy."Document Flow Sales" := DocumentAttachment."Document Flow Sales";
+                DocumentAttachmentCopy.Validate("Document Type", pPurchHeader."Document Type");
+                DocumentAttachmentCopy."Line No." := DocumentAttachment."Line No.";
+                DocumentAttachmentCopy."VAT Report Config. Code" := DocumentAttachment."VAT Report Config. Code";
+                DocumentAttachmentCopy."Document Flow Service" := DocumentAttachment."Document Flow Service";
+                DocumentAttachmentCopy."Document Flow Production" := DocumentAttachment."Document Flow Production";
+                DocumentAttachmentCopy.Insert(true);
+            until DocumentAttachment.Next() = 0;
     end;
 
     [IntegrationEvent(false, false)]
