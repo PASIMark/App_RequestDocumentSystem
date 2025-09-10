@@ -213,7 +213,7 @@ table 70829615 PPHRDS_ReqHeader
         {
             DataClassification = CustomerContent;
             Caption = 'Request Code';
-            TableRelation = PPHRDS_RequestCode;
+            TableRelation = PPHRDS_RequestCode where(Active = const(true));
 
             trigger OnValidate();
             begin
