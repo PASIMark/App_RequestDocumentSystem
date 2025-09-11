@@ -13,6 +13,15 @@ page 70829610 PPHRDS_ProcessedRequestFactBox
             {
                 Tooltip = 'Specifies the Request No..';
                 ApplicationArea = All;
+                DrillDown = true;
+
+                trigger OnDrillDown()
+                var
+                    ProcessedReqHeader: Record PPHRDS_ProcessedReqHeader;
+                begin
+                    ProcessedReqHeader.SetRange("No.", Rec."Processed Request No.");
+                    Page.Run(Page::"PPHRDS_ProcessedRequest", ProcessedReqHeader);
+                end;
             }
             field("Requestor ID"; Rec."Requestor ID")
             {
