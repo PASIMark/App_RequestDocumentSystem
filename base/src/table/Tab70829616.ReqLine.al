@@ -1354,6 +1354,8 @@ table 70829616 PPHRDS_ReqLine
     var
         ICPartner: Record "IC Partner";
     begin
+        if rec."IC Partner Code" = '' then
+            exit;
 
         case Rec.Type of
             Rec.Type::" ":
