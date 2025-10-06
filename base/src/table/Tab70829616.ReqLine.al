@@ -466,12 +466,26 @@ table 70829616 PPHRDS_ReqLine
             DataClassification = CustomerContent;
             Caption = 'Status';
         }
+        field(125; "Buy-from IC Partner Code"; Code[20])
+        {
+            Caption = 'Buy-from IC Partner Code';
+            Editable = false;
+            TableRelation = "IC Partner";
+        }
+        field(126; "Pay-to IC Partner Code"; Code[20])
+        {
+            Caption = 'Pay-to IC Partner Code';
+            Editable = false;
+            TableRelation = "IC Partner";
+        }
         field(130; "IC Partner Code"; Code[20])
         {
             Caption = 'IC Partner Code';
             TableRelation = "IC Partner";
 
             trigger OnValidate()
+            var
+                PurchHeader: Record "Purchase Header";
             begin
                 if "IC Partner Code" <> '' then begin
                     TestField(Type, Type::"G/L Account");
@@ -479,6 +493,39 @@ table 70829616 PPHRDS_ReqLine
                     PurchHeader.TestField("Pay-to IC Partner Code", '');
                     Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::"G/L Account");
                 end;
+            end;
+        }
+        field(138; "IC Item Reference No."; Code[50])
+        {
+            AccessByPermission = TableData "Item Reference" = R;
+            Caption = 'IC Item Reference No.';
+
+            trigger OnLookup()
+            var
+                ItemReference: Record "Item Reference";
+                ItemVendorCatalog: Record "Item Vendor";
+            begin
+                if "No." <> '' then
+                    case "IC Partner Ref. Type" of
+                        "IC Partner Ref. Type"::"Cross Reference":
+                            begin
+                                ItemReference.Reset();
+                                ItemReference.SetCurrentKey("Reference Type", "Reference Type No.");
+                                ItemReference.SetFilter(
+                                    "Reference Type", '%1|%2',
+                                    ItemReference."Reference Type"::Vendor, ItemReference."Reference Type"::" ");
+                                ItemReference.SetFilter("Reference Type No.", '%1|%2', Rec."Vendor No.", '');
+                                if PAGE.RunModal(PAGE::"Item Reference List", ItemReference) = ACTION::LookupOK then
+                                    Rec.Validate("IC Item Reference No.", ItemReference."Reference No.");
+                            end;
+                        "IC Partner Ref. Type"::"Vendor Item No.":
+                            begin
+                                ItemVendorCatalog.SetCurrentKey("Vendor No.");
+                                ItemVendorCatalog.SetRange("Vendor No.", Rec."Vendor No.");
+                                if PAGE.RunModal(PAGE::"Vendor Item Catalog", ItemVendorCatalog) = ACTION::LookupOK then
+                                    Rec.Validate("IC Item Reference No.", ItemVendorCatalog."Vendor Item No.");
+                            end;
+                    end;
             end;
         }
         field(480; "Dimension Set ID"; Integer)
@@ -691,7 +738,7 @@ table 70829616 PPHRDS_ReqLine
             begin
                 IsValidReqCode();
                 GetReqHeader();
-                ItemRefMgt.ValidatePurchaseReferenceNo(Rec, ReqHeader, ItemReference, true, CurrFieldNo);
+                ItemRefMgt.ValidateReqReferenceNo(Rec, ReqHeader, ItemReference, true, CurrFieldNo);
             end;
         }
         field(5726; "Item Reference Unit of Measure"; Code[10])
@@ -1307,47 +1354,69 @@ table 70829616 PPHRDS_ReqLine
     var
         ICPartner: Record "IC Partner";
     begin
-        if PurchHeader."Send IC Document" and (PurchHeader."IC Direction" = PurchHeader."IC Direction"::Outgoing) then
-            case Type of
-                Type::" ", Type::"Charge (Item)":
-                    begin
-                        "IC Partner Ref. Type" := Type;
-                        "IC Partner Reference" := "No.";
+
+        case Rec.Type of
+            Rec.Type::" ":
+                begin
+                    Rec."IC Partner Ref. Type" := Type;
+                    Rec."IC Partner Reference" := "No.";
+                end;
+            Rec.Type::"G/L Account":
+                begin
+                    "IC Partner Ref. Type" := Type;
+                    "IC Partner Reference" := GLAcc."Default IC Partner G/L Acc. No";
+                end;
+            Rec.Type::Item:
+                begin
+                    ICPartner.Get(Rec."Buy-from IC Partner Code");
+                    case ICPartner."Outbound Purch. Item No. Type" of
+                        ICPartner."Outbound Purch. Item No. Type"::"Common Item No.":
+                            Rec.Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::"Common Item No.");
+                        ICPartner."Outbound Purch. Item No. Type"::"Internal No.":
+                            begin
+                                Rec.Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::Item);
+                                Rec."IC Partner Reference" := "No.";
+                            end;
+                        ICPartner."Outbound Purch. Item No. Type"::"Cross Reference":
+                            begin
+                                Rec.Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::"Cross Reference");
+                                UpdateICPartnerItemReference();
+                            end;
+                        ICPartner."Outbound Purch. Item No. Type"::"Vendor Item No.":
+                            begin
+                                "IC Partner Ref. Type" := "IC Partner Ref. Type"::"Vendor Item No.";
+                                "IC Item Reference No." := "Vendor Item No.";
+                            end;
                     end;
-                Type::"G/L Account":
-                    begin
-                        "IC Partner Ref. Type" := Type;
-                        "IC Partner Reference" := GLAcc."Default IC Partner G/L Acc. No";
-                    end;
-                Type::Item:
-                    begin
-                        ICPartner.Get(PurchHeader."Buy-from IC Partner Code");
-                        case ICPartner."Outbound Purch. Item No. Type" of
-                            ICPartner."Outbound Purch. Item No. Type"::"Common Item No.":
-                                Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::"Common Item No.");
-                            ICPartner."Outbound Purch. Item No. Type"::"Internal No.":
-                                begin
-                                    Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::Item);
-                                    "IC Partner Reference" := "No.";
-                                end;
-                            ICPartner."Outbound Purch. Item No. Type"::"Cross Reference":
-                                begin
-                                    Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::"Cross Reference");
-                                    UpdateICPartnerItemReference();
-                                end;
-                            ICPartner."Outbound Purch. Item No. Type"::"Vendor Item No.":
-                                begin
-                                    "IC Partner Ref. Type" := "IC Partner Ref. Type"::"Vendor Item No.";
-                                    "IC Item Reference No." := "Vendor Item No.";
-                                end;
-                        end;
-                    end;
-                Type::"Fixed Asset":
-                    begin
-                        "IC Partner Ref. Type" := "IC Partner Ref. Type"::" ";
-                        "IC Partner Reference" := '';
-                    end;
-            end;
+                end;
+            Type::"Fixed Asset":
+                begin
+                    "IC Partner Ref. Type" := "IC Partner Ref. Type"::" ";
+                    "IC Partner Reference" := '';
+                end;
+
+        end;
+    end;
+
+    local procedure UpdateICPartnerItemReference()
+    var
+        ItemReference: Record "Item Reference";
+        ToDate: Date;
+    begin
+        ItemReference.SetRange("Reference Type", "Item Reference Type"::Vendor);
+        ItemReference.SetRange("Reference Type No.", Rec."Vendor No.");
+        ItemReference.SetRange("Item No.", "No.");
+        ItemReference.SetRange("Variant Code", "Variant Code");
+        ItemReference.SetRange("Unit of Measure", "Unit of Measure Code");
+        ToDate := Rec.GetDateForCalculations();
+        if ToDate <> 0D then begin
+            ItemReference.SetFilter("Starting Date", '<=%1', ToDate);
+            ItemReference.SetFilter("Ending Date", '>=%1|%2', ToDate, 0D);
+        end;
+        if ItemReference.FindFirst() then
+            "IC Item Reference No." := ItemReference."Reference No."
+        else
+            "IC Partner Reference" := "No.";
     end;
 
     [IntegrationEvent(false, false)]
