@@ -42,6 +42,34 @@ page 70829616 PPHRDS_RequestSubform
                     StyleExpr = BudgetStyleExpression;
                     Visible = false;
                 }
+                field("Item Reference No."; Rec."Item Reference No.")
+                {
+                    Tooltip = 'Specifies the Item Reference No..';
+                    ApplicationArea = All;
+                    StyleExpr = BudgetStyleExpression;
+                    Visible = false;
+                }
+                field("IC Partner Code"; Rec."IC Partner Code")
+                {
+                    Tooltip = 'Specifies the IC Partner Code.';
+                    ApplicationArea = All;
+                    StyleExpr = BudgetStyleExpression;
+                    Visible = false;
+                }
+                field("IC Partner Reference"; Rec."IC Partner Reference")
+                {
+                    Tooltip = 'Specifies the IC Partner Reference.';
+                    ApplicationArea = All;
+                    StyleExpr = BudgetStyleExpression;
+                    Visible = false;
+                }
+                field("IC Partner Ref. Type"; Rec."IC Partner Ref. Type")
+                {
+                    Tooltip = 'Specifies the IC Partner Ref. Type.';
+                    ApplicationArea = All;
+                    StyleExpr = BudgetStyleExpression;
+                    Visible = false;
+                }
                 field(Description; Rec.Description)
                 {
                     Tooltip = 'Specifies the Description.';

@@ -266,6 +266,16 @@ table 70829600 PPHRDS_ProcessedRequestEntry
             DataClassification = CustomerContent;
             Caption = 'Journal Document No.';
         }
+        field(107; "IC Partner Ref. Type"; Enum "IC Partner Reference Type")
+        {
+            AccessByPermission = TableData "IC G/L Account" = R;
+            Caption = 'IC Partner Ref. Type';
+        }
+        field(108; "IC Partner Reference"; Code[20])
+        {
+            AccessByPermission = TableData "IC G/L Account" = R;
+            Caption = 'IC Partner Reference';
+        }
         field(111; Notes; Text[250])
         {
             DataClassification = CustomerContent;
@@ -275,6 +285,16 @@ table 70829600 PPHRDS_ProcessedRequestEntry
         {
             DataClassification = CustomerContent;
             Caption = 'Original Quantity';
+        }
+        field(130; "IC Partner Code"; Code[20])
+        {
+            Caption = 'IC Partner Code';
+            TableRelation = "IC Partner";
+        }
+        field(138; "IC Item Reference No."; Code[50])
+        {
+            AccessByPermission = TableData "Item Reference" = R;
+            Caption = 'IC Item Reference No.';
         }
         field(478; "Processed SystemId (Header)"; Guid)
         {
@@ -295,6 +315,26 @@ table 70829600 PPHRDS_ProcessedRequestEntry
             Caption = 'Dimension Set ID';
             Editable = false;
             TableRelation = "Dimension Set Entry";
+        }
+        field(5725; "Item Reference No."; Code[50])
+        {
+            AccessByPermission = TableData "Item Reference" = R;
+            Caption = 'Item Reference No.';
+            ExtendedDatatype = Barcode;
+        }
+        field(5726; "Item Reference Unit of Measure"; Code[10])
+        {
+            AccessByPermission = TableData "Item Reference" = R;
+            Caption = 'Item Reference Unit of Measure';
+            TableRelation = if (Type = const(Item)) "Item Unit of Measure".Code where("Item No." = field("No."));
+        }
+        field(5727; "Item Reference Type"; Enum "Item Reference Type")
+        {
+            Caption = 'Item Reference Type';
+        }
+        field(5728; "Item Reference Type No."; Code[30])
+        {
+            Caption = 'Item Reference Type No.';
         }
     }
 

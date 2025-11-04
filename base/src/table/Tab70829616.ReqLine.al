@@ -406,10 +406,122 @@ table 70829616 PPHRDS_ReqLine
                 "Line Amount" := Round("Line Amount", Currency."Amount Rounding Precision");
             end;
         }
+        field(107; "IC Partner Ref. Type"; Enum "IC Partner Reference Type")
+        {
+            AccessByPermission = TableData "IC G/L Account" = R;
+            Caption = 'IC Partner Ref. Type';
+
+            trigger OnValidate()
+            var
+                Item: Record Item;
+            begin
+                if "IC Partner Code" <> '' then
+                    "IC Partner Ref. Type" := "IC Partner Ref. Type"::"G/L Account";
+                if "IC Partner Ref. Type" <> xRec."IC Partner Ref. Type" then
+                    "IC Partner Reference" := '';
+                if "IC Partner Ref. Type" = "IC Partner Ref. Type"::"Common Item No." then begin
+                    GetItem(Item);
+                    Item.TestField("Common Item No.");
+                    "IC Partner Reference" := Item."Common Item No.";
+                end;
+            end;
+        }
+        field(108; "IC Partner Reference"; Code[20])
+        {
+            AccessByPermission = TableData "IC G/L Account" = R;
+            Caption = 'IC Partner Reference';
+
+            trigger OnLookup()
+            var
+                ICGLAccount: Record "IC G/L Account";
+                Item: Record Item;
+                ItemVendorCatalog: Record "Item Vendor";
+            begin
+                if "No." <> '' then
+                    case "IC Partner Ref. Type" of
+                        "IC Partner Ref. Type"::"G/L Account":
+                            begin
+                                if ICGLAccount.Get("IC Partner Reference") then;
+                                if PAGE.RunModal(PAGE::"IC G/L Account List", ICGLAccount) = ACTION::LookupOK then
+                                    Validate("IC Partner Reference", ICGLAccount."No.");
+                            end;
+                        "IC Partner Ref. Type"::Item:
+                            begin
+                                if Item.Get("IC Partner Reference") then;
+                                if PAGE.RunModal(PAGE::"Item List", Item) = ACTION::LookupOK then
+                                    Validate("IC Partner Reference", Item."No.");
+                            end;
+                        "IC Partner Ref. Type"::"Vendor Item No.":
+                            begin
+                                ItemVendorCatalog.SetCurrentKey("Vendor No.");
+                                ItemVendorCatalog.SetRange("Vendor No.", Rec."Vendor No.");
+                                if PAGE.RunModal(PAGE::"Vendor Item Catalog", ItemVendorCatalog) = ACTION::LookupOK then
+                                    Validate("IC Partner Reference", ItemVendorCatalog."Vendor Item No.");
+                            end;
+                    end;
+            end;
+        }
         field(120; Status; Enum PPHRDS_ReqHeaderStatus)
         {
             DataClassification = CustomerContent;
             Caption = 'Status';
+        }
+        field(125; "Buy-from IC Partner Code"; Code[20])
+        {
+            Caption = 'Buy-from IC Partner Code';
+            Editable = false;
+            TableRelation = "IC Partner";
+        }
+        field(126; "Pay-to IC Partner Code"; Code[20])
+        {
+            Caption = 'Pay-to IC Partner Code';
+            Editable = false;
+            TableRelation = "IC Partner";
+        }
+        field(130; "IC Partner Code"; Code[20])
+        {
+            Caption = 'IC Partner Code';
+            TableRelation = "IC Partner";
+            trigger OnValidate()
+            begin
+                if Rec."IC Partner Code" <> '' then begin
+                    Rec.TestField(Type, Type::"G/L Account");
+                    Rec.Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::"G/L Account");
+                end;
+            end;
+        }
+        field(138; "IC Item Reference No."; Code[50])
+        {
+            AccessByPermission = TableData "Item Reference" = R;
+            Caption = 'IC Item Reference No.';
+
+            trigger OnLookup()
+            var
+                ItemReference: Record "Item Reference";
+                ItemVendorCatalog: Record "Item Vendor";
+            begin
+                if "No." <> '' then
+                    case "IC Partner Ref. Type" of
+                        "IC Partner Ref. Type"::"Cross Reference":
+                            begin
+                                ItemReference.Reset();
+                                ItemReference.SetCurrentKey("Reference Type", "Reference Type No.");
+                                ItemReference.SetFilter(
+                                    "Reference Type", '%1|%2',
+                                    ItemReference."Reference Type"::Vendor, ItemReference."Reference Type"::" ");
+                                ItemReference.SetFilter("Reference Type No.", '%1|%2', Rec."Vendor No.", '');
+                                if PAGE.RunModal(PAGE::"Item Reference List", ItemReference) = ACTION::LookupOK then
+                                    Rec.Validate("IC Item Reference No.", ItemReference."Reference No.");
+                            end;
+                        "IC Partner Ref. Type"::"Vendor Item No.":
+                            begin
+                                ItemVendorCatalog.SetCurrentKey("Vendor No.");
+                                ItemVendorCatalog.SetRange("Vendor No.", Rec."Vendor No.");
+                                if PAGE.RunModal(PAGE::"Vendor Item Catalog", ItemVendorCatalog) = ACTION::LookupOK then
+                                    Rec.Validate("IC Item Reference No.", ItemVendorCatalog."Vendor Item No.");
+                            end;
+                    end;
+            end;
         }
         field(480; "Dimension Set ID"; Integer)
         {
@@ -597,6 +709,46 @@ table 70829616 PPHRDS_ReqLine
             DecimalPlaces = 0 : 5;
             Editable = false;
             FieldClass = FlowField;
+        }
+        field(5725; "Item Reference No."; Code[50])
+        {
+            AccessByPermission = TableData "Item Reference" = R;
+            Caption = 'Item Reference No.';
+            ExtendedDatatype = Barcode;
+
+            trigger OnLookup()
+            var
+                ItemReferenceMgt: codeunit "Item Reference Management";
+                ItemRefMgt: codeunit PPHRDS_ItemReferenceMgt;
+            begin
+                IsValidReqCode();
+                GetReqHeader();
+                ItemRefMgt.PurchaseReferenceNoLookUp(Rec, ReqHeader);
+            end;
+
+            trigger OnValidate()
+            var
+                ItemReference: Record "Item Reference";
+                ItemRefMgt: codeunit PPHRDS_ItemReferenceMgt;
+            begin
+                IsValidReqCode();
+                GetReqHeader();
+                ItemRefMgt.ValidateReqReferenceNo(Rec, ReqHeader, ItemReference, true, CurrFieldNo);
+            end;
+        }
+        field(5726; "Item Reference Unit of Measure"; Code[10])
+        {
+            AccessByPermission = TableData "Item Reference" = R;
+            Caption = 'Item Reference Unit of Measure';
+            TableRelation = if (Type = const(Item)) "Item Unit of Measure".Code where("Item No." = field("No."));
+        }
+        field(5727; "Item Reference Type"; Enum "Item Reference Type")
+        {
+            Caption = 'Item Reference Type';
+        }
+        field(5728; "Item Reference Type No."; Code[30])
+        {
+            Caption = 'Item Reference Type No.';
         }
         field(5752; "Completely Processed"; Boolean)
         {
@@ -1154,6 +1306,126 @@ table 70829616 PPHRDS_ReqLine
         Rec := Line;
     end;
 
+    local procedure IsValidReqCode()
+    var
+        RequestCode: Record PPHRDS_RequestCode;
+    begin
+        Rec.TestField("Request Code");
+
+        RequestCode.SetLoadFields(Code, Type);
+        RequestCode.Get(Rec."Request Code");
+        if RequestCode.Type <> RequestCode.Type::"General Journal" then
+            Error('Request Code %1 is not valid. You cannot use a Request Code of type General Journal.', Rec."Request Code");
+    end;
+
+    procedure GetDateForCalculations() CalculationDate: Date;
+    var
+        FromReqHeader: Record PPHRDS_ReqHeader;
+    begin
+        if Rec."Document No." = '' then
+            exit(WorkDate());
+
+        GetReqHeader();
+        FromReqHeader := ReqHeader;
+        CalculationDate := GetDateForCalculations(FromReqHeader);
+    end;
+
+    procedure GetDateForCalculations(FromReqHeader: Record PPHRDS_ReqHeader) CalculationDate: Date;
+    begin
+        CalculationDate := FromReqHeader."Posting Date";
+
+        if CalculationDate = 0D then
+            CalculationDate := WorkDate();
+    end;
+
+    procedure SetReqhHeader(NewReqHeader: Record PPHRDS_ReqHeader)
+    begin
+        ReqHeader := NewReqHeader;
+    end;
+
+    procedure SetVendorItemNo()
+    var
+        Item: Record Item;
+        ItemVend: Record "Item Vendor";
+    begin
+        GetItem(Item);
+        ItemVend.Init();
+        ItemVend."Vendor No." := Rec."Vendor No.";
+        ItemVend."Variant Code" := Rec."Variant Code";
+        Item.FindItemVend(ItemVend, "Location Code");
+        Rec.Validate("Vendor Item No.", ItemVend."Vendor Item No.");
+    end;
+
+    procedure UpdateICPartner()
+    var
+        ICPartner: Record "IC Partner";
+    begin
+        if rec."IC Partner Code" = '' then
+            exit;
+
+        case Rec.Type of
+            Rec.Type::" ":
+                begin
+                    Rec."IC Partner Ref. Type" := Type;
+                    Rec."IC Partner Reference" := "No.";
+                end;
+            Rec.Type::"G/L Account":
+                begin
+                    "IC Partner Ref. Type" := Type;
+                    "IC Partner Reference" := GLAcc."Default IC Partner G/L Acc. No";
+                end;
+            Rec.Type::Item:
+                begin
+                    ICPartner.Get(Rec."Buy-from IC Partner Code");
+                    case ICPartner."Outbound Purch. Item No. Type" of
+                        ICPartner."Outbound Purch. Item No. Type"::"Common Item No.":
+                            Rec.Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::"Common Item No.");
+                        ICPartner."Outbound Purch. Item No. Type"::"Internal No.":
+                            begin
+                                Rec.Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::Item);
+                                Rec."IC Partner Reference" := "No.";
+                            end;
+                        ICPartner."Outbound Purch. Item No. Type"::"Cross Reference":
+                            begin
+                                Rec.Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::"Cross Reference");
+                                UpdateICPartnerItemReference();
+                            end;
+                        ICPartner."Outbound Purch. Item No. Type"::"Vendor Item No.":
+                            begin
+                                "IC Partner Ref. Type" := "IC Partner Ref. Type"::"Vendor Item No.";
+                                "IC Item Reference No." := "Vendor Item No.";
+                            end;
+                    end;
+                end;
+            Type::"Fixed Asset":
+                begin
+                    "IC Partner Ref. Type" := "IC Partner Ref. Type"::" ";
+                    "IC Partner Reference" := '';
+                end;
+
+        end;
+    end;
+
+    local procedure UpdateICPartnerItemReference()
+    var
+        ItemReference: Record "Item Reference";
+        ToDate: Date;
+    begin
+        ItemReference.SetRange("Reference Type", "Item Reference Type"::Vendor);
+        ItemReference.SetRange("Reference Type No.", Rec."Vendor No.");
+        ItemReference.SetRange("Item No.", "No.");
+        ItemReference.SetRange("Variant Code", "Variant Code");
+        ItemReference.SetRange("Unit of Measure", "Unit of Measure Code");
+        ToDate := Rec.GetDateForCalculations();
+        if ToDate <> 0D then begin
+            ItemReference.SetFilter("Starting Date", '<=%1', ToDate);
+            ItemReference.SetFilter("Ending Date", '>=%1|%2', ToDate, 0D);
+        end;
+        if ItemReference.FindFirst() then
+            "IC Item Reference No." := ItemReference."Reference No."
+        else
+            "IC Partner Reference" := "No.";
+    end;
 
     [IntegrationEvent(false, false)]
     local procedure OnAfterUpdateAmounts(var ReqLine: Record PPHRDS_ReqLine; var xReqLine: Record PPHRDS_ReqLine);

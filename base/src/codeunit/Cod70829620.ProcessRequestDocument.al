@@ -836,6 +836,25 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
             parPurchaseLine.Validate("Job No.", ReqLine."Job No.");
             parPurchaseLine.Validate("Job Task No.", ReqLine."Job Task No.");
         end;
+
+        if ReqLine."Item Reference No." <> '' then
+            parPurchaseLine.Validate("Item Reference No.", ReqLine."Item Reference No.");
+
+        if ReqLine."Item Reference Type" <> ReqLine."Item Reference Type"::" " then
+            parPurchaseLine.Validate("Item Reference Type", ReqLine."Item Reference Type");
+
+        if ReqLine."Item Reference Type No." <> '' then
+            parPurchaseLine.Validate("Item Reference Type No.", ReqLine."Item Reference Type No.");
+
+        if ReqLine."IC Partner Code" <> '' then
+            parPurchaseLine.Validate("IC Partner Code", ReqLine."IC Partner Code");
+
+        if ReqLine."IC Partner Ref. Type" <> ReqLine."IC Partner Ref. Type"::" " then
+            parPurchaseLine.Validate("IC Partner Ref. Type", ReqLine."IC Partner Ref. Type");
+
+        if Reqline."IC Item Reference No." <> '' then
+            parPurchaseLine.Validate("IC Item Reference No.", Reqline."IC Item Reference No.");
+
         CreatePurchaseLineOnBeforeModify(ReqLine, parPurchaseHeader, parPurchaseLine);
         parPurchaseLine.Modify(true);
     end;
