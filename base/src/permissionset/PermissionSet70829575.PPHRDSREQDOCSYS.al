@@ -20,6 +20,7 @@ permissionset 70829575 "PPHRDS_REQDOCSYS"
         codeunit PPHRDS_RequestMgtEventHandler = X,
         codeunit PPHRDS_ReqWFEventHandling = X,
         codeunit PPHRDS_ReqWFResponseHandling = X,
+        codeunit PPHRDS_ItemReferenceMgt = X,
         page PPHRDS_FixedAssetBudgets = X,
         page PPHRDS_GetRequestLines = X,
         page PPHRDS_GetRequestLinesFactBox = X,

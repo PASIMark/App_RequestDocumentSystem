@@ -167,6 +167,38 @@ page 70829600 PPHRDS_ProcessedRequestEntries
                     ApplicationArea = All;
                     Visible = false;
                 }
+                field("IC Item Reference No."; Rec."IC Item Reference No.")
+                {
+                    ToolTip = 'Specifies the value of the IC Item Reference No. field.', Comment = '%';
+                }
+                field("IC Partner Code"; Rec."IC Partner Code")
+                {
+                    ToolTip = 'Specifies the value of the IC Partner Code field.', Comment = '%';
+                }
+                field("IC Partner Ref. Type"; Rec."IC Partner Ref. Type")
+                {
+                    ToolTip = 'Specifies the value of the IC Partner Ref. Type field.', Comment = '%';
+                }
+                field("IC Partner Reference"; Rec."IC Partner Reference")
+                {
+                    ToolTip = 'Specifies the value of the IC Partner Reference field.', Comment = '%';
+                }
+                field("Item Reference No."; Rec."Item Reference No.")
+                {
+                    ToolTip = 'Specifies the value of the Item Reference No. field.', Comment = '%';
+                }
+                field("Item Reference Type"; Rec."Item Reference Type")
+                {
+                    ToolTip = 'Specifies the value of the Item Reference Type field.', Comment = '%';
+                }
+                field("Item Reference Type No."; Rec."Item Reference Type No.")
+                {
+                    ToolTip = 'Specifies the value of the Item Reference Type No. field.', Comment = '%';
+                }
+                field("Item Reference Unit of Measure"; Rec."Item Reference Unit of Measure")
+                {
+                    ToolTip = 'Specifies the value of the Item Reference Unit of Measure field.', Comment = '%';
+                }
             }
         }
         area(factboxes)
