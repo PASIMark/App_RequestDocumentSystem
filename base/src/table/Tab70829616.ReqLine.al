@@ -482,16 +482,11 @@ table 70829616 PPHRDS_ReqLine
         {
             Caption = 'IC Partner Code';
             TableRelation = "IC Partner";
-
             trigger OnValidate()
-            var
-                PurchHeader: Record "Purchase Header";
             begin
-                if "IC Partner Code" <> '' then begin
-                    TestField(Type, Type::"G/L Account");
-                    PurchHeader.TestField("Buy-from IC Partner Code", '');
-                    PurchHeader.TestField("Pay-to IC Partner Code", '');
-                    Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::"G/L Account");
+                if Rec."IC Partner Code" <> '' then begin
+                    Rec.TestField(Type, Type::"G/L Account");
+                    Rec.Validate("IC Partner Ref. Type", "IC Partner Ref. Type"::"G/L Account");
                 end;
             end;
         }
