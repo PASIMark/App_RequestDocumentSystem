@@ -430,16 +430,8 @@ table 70829616 PPHRDS_ReqLine
             TableRelation = Vendor;
 
             trigger OnValidate();
-            var
-                Vendor: Record Vendor;
             begin
-                if not ("Request Type" in ["Request Type"::Purchase, "Request Type"::"Req. Worksheet"]) then
-                    FieldError("Request Type");
-
-                if Vendor.Get("Vendor No.") then
-                    "Vendor Name" := Vendor.Name
-                else
-                    "Vendor Name" := '';
+                ValidateVendorNo("Vendor No.");
             end;
         }
         field(521; "Transfer-from Code"; Code[10])
@@ -835,7 +827,7 @@ table 70829616 PPHRDS_ReqLine
           DimMgt.EditDimensionSet("Dimension Set ID", StrSubstNo(CaptionFormatLbl, TableCaption, "Document No.", "Line No."));
         DimMgt.UpdateGlobalDimFromDimSetID("Dimension Set ID", "Shortcut Dimension 1 Code", "Shortcut Dimension 2 Code");
 
-        // UpdateHeaderDimension();
+        OnAfterShowDocDim(Rec);
     end;
 
     procedure CreateDim(Type1: Integer; No1: Code[20]);
@@ -855,6 +847,8 @@ table 70829616 PPHRDS_ReqLine
     procedure ValidateShortcutDimCode(FieldNumber: Integer; var ShortcutDimCode: Code[20]);
     begin
         DimMgt.ValidateShortcutDimValues(FieldNumber, ShortcutDimCode, "Dimension Set ID");
+
+        OnAfterValidateShortcutDimCode(Rec, FieldNumber, ShortcutDimCode);
     end;
 
     procedure LookupShortcutDimCode(FieldNumber: Integer; var ShortcutDimCode: Code[20]);
@@ -970,7 +964,13 @@ table 70829616 PPHRDS_ReqLine
     end;
 
     local procedure CheckTypeCombination()
+    var
+        IsHandled: Boolean;
     begin
+        OnBeforeCheckTypeCombination(Rec, IsHandled);
+        if IsHandled then
+            exit;
+
         if "Request Code" = '' then
             exit;
 
@@ -984,6 +984,23 @@ table 70829616 PPHRDS_ReqLine
             Type::Vendor, Type::Employee:
                 TestField("Request Type", "Request Type"::"General Journal");
         end;
+    end;
+
+    local procedure ValidateVendorNo(NewVendorNo: Code[20])
+    var
+        IsHandled: Boolean;
+    begin
+        OnBeforeValidateVendorNo(Rec, NewVendorNo, IsHandled);
+        if IsHandled then
+            exit;
+
+        if not ("Request Type" in ["Request Type"::Purchase, "Request Type"::"Req. Worksheet"]) then
+            FieldError("Request Type");
+
+        if Vendor.Get(NewVendorNo) then
+            "Vendor Name" := Vendor.Name
+        else
+            "Vendor Name" := '';
     end;
 
     procedure CheckLocation();
@@ -1105,6 +1122,26 @@ table 70829616 PPHRDS_ReqLine
 
     [IntegrationEvent(false, false)]
     local procedure OnAfterUpdateAmounts(var ReqLine: Record PPHRDS_ReqLine; var xReqLine: Record PPHRDS_ReqLine);
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeCheckTypeCombination(var ReqLine: Record PPHRDS_ReqLine; var IsHandled: Boolean)
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeValidateVendorNo(var ReqLine: Record PPHRDS_ReqLine; var NewVendorNo: Code[20]; var IsHandled: Boolean)
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    procedure OnAfterShowDocDim(var ReqLine: Record PPHRDS_ReqLine);
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    procedure OnAfterValidateShortcutDimCode(var ReqLine: Record PPHRDS_ReqLine; var FieldNumber: Integer; var ShortcutDimCode: Code[20])
     begin
     end;
 }

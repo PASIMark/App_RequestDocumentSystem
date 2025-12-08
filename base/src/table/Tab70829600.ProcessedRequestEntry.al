@@ -268,6 +268,12 @@ table 70829600 PPHRDS_ProcessedRequestEntry
             DataClassification = CustomerContent;
             Caption = 'Original Quantity';
         }
+        field(301; "Generated Fixed Asset No."; Code[20])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Generated Fixed Asset No.';
+            Editable = false;
+        }
         field(478; "Processed SystemId (Header)"; Guid)
         {
             DataClassification = CustomerContent;

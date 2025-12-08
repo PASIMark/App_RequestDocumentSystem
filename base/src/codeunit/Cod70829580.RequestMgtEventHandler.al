@@ -216,6 +216,17 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         if not RunTrigger then
             exit;
 
+        DeletePurchaseLine(Rec);
+    end;
+
+    local procedure DeletePurchaseLine(var Rec: Record "Purchase Line")
+    var
+        IsHandled: Boolean;
+    begin
+        OnBeforeDeletePurchaseLine(Rec, IsHandled);
+        if IsHandled then
+            exit;
+
         ProcessedRequestEntry.Reset();
         ProcessedRequestEntry.SetRange("Processed SystemId", Rec.SystemId);
         ProcessedRequestEntry.SetRange(Status, ProcessedRequestEntry.Status::Processed);
@@ -225,6 +236,8 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
             ProcessedRequestEntry.Modify(true);
             RequestManagement.UpdateReqLineQty(ProcessedRequestEntry."Request No.", ProcessedRequestEntry."Request Line No.");
         end;
+
+        OnAfterDeletePurchaseLine(Rec, ProcessedRequestEntry);
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Transfer Line", 'OnAfterDeleteEvent', '', false, false)]
@@ -314,7 +327,7 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         RecordRestrictionMgt.CheckRecordHasUsageRestrictions(Sender);
     end;
 
-    [EventSubscriber(ObjectType::Page, Page::"Document Attachment Factbox", 'OnBeforeDrillDown', '', false, false)]
+    [EventSubscriber(ObjectType::Page, Page::"Doc. Attachment List Factbox", 'OnAfterGetRecRefFail', '', false, false)]
     local procedure DocumentAttachmentFactboxOnBeforeDrillDown(DocumentAttachment: Record "Document Attachment"; var RecRef: RecordRef)
     var
         ReqHeader: Record PPHRDS_ReqHeader;
@@ -550,13 +563,21 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
 
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Document Attachment Mgmt", OnAfterTableHasNumberFieldPrimaryKey, '', false, false)]
     local procedure OnAfterSetDocumentAttachmentFiltersForRecRefInternal(var FieldNo: Integer; TableNo: Integer; var Result: Boolean)
-    var
-        ReqHeader: Record PPHRDS_ReqHeader;
     begin
         if TableNo <> Database::PPHRDS_ReqHeader then
             exit;
 
         FieldNo := 1;
         Result := true;
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeDeletePurchaseLine(var PurchaseLine: Record "Purchase Line"; var IsHandled: Boolean)
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnAfterDeletePurchaseLine(var PurchaseLine: Record "Purchase Line"; ProcessedRequestEntry: Record PPHRDS_ProcessedRequestEntry)
+    begin
     end;
 }

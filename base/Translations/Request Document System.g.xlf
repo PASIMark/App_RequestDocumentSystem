@@ -433,6 +433,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field Expected Receipt Date - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2492377119 - Field 3775337234 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Generated Fixed Asset No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field Generated Fixed Asset No. - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2492377119 - Field 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2713,10 +2718,20 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action History - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 896511085 - Action 1121121043 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View and manage processed request entry information.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Processed Request Entries - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 896511085 - Action 1121121043 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Processed Request Entries</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Processed Request Entries - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 896511085 - Action 1306311508 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View and manage processed request information.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Processed Requests - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 896511085 - Action 1306311508 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Processed Requests</source>
@@ -2728,30 +2743,60 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Planning - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 896511085 - Action 347328507 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View and manage employee information.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Employees - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 896511085 - Action 347328507 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Employees</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Employees - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 896511085 - Action 947294828 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View and manage fixed asset budget information.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Fixed Asset Budgets - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 896511085 - Action 947294828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Fixed Asset Budgets</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Fixed Asset Budgets - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 896511085 - Action 622789158 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View and manage G/L budget information.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action G/L Budgets - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 896511085 - Action 622789158 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>G/L Budgets</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action G/L Budgets - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 896511085 - Action 4007918663 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View and manage purchase budget information.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Purchase Budgets - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 896511085 - Action 4007918663 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Purchase Budgets</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Purchase Budgets - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 896511085 - Action 2112607041 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View and manage request code information.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action RequestCodes - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 896511085 - Action 2112607041 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request Codes</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action RequestCodes - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 896511085 - Action 713531721 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View and manage vendor information.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Vendors - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 896511085 - Action 713531721 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Vendors</source>
@@ -2767,6 +2812,11 @@
           <source>Setup</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 896511085 - Action 2497095938 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>View and manage request document system setup.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocRoleCenter - Action RequestSetup - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 896511085 - Action 2497095938 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Request Document System Setup</source>

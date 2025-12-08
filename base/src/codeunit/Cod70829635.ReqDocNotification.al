@@ -250,7 +250,7 @@ codeunit 70829635 PPHRDS_ReqDocNotification
             MyNotifications.DeleteAll(true);
     end;
 
-    local procedure TurnOffReminderCode(): Code[128];
+    procedure TurnOffReminderCode(): Code[128];
     begin
         exit(UpperCase('TurnOffReminder'));
     end;
@@ -412,6 +412,8 @@ codeunit 70829635 PPHRDS_ReqDocNotification
                             ReqLine.SetRange("Request Type", ReqLine."Request Type"::"General Journal");
                             ReqLine.SetRange("Journal Template Name", JournalTemplateName);
                         end;
+                    else
+                        OnCountPendingRequestOnTypeCaseElse(locRequestType, ReqLine, locRequestPurchDocType);
                 end;
                 ReqLine.SetRange("Completely Processed", false);
                 if not ReqLine.IsEmpty then
@@ -487,5 +489,10 @@ codeunit 70829635 PPHRDS_ReqDocNotification
     procedure GetGenJnlNotifID(): Guid
     begin
         exit('2fd76b88-b8f7-4280-9a13-2855c89c1825')
+    end;
+
+    [IntegrationEvent(false, false)]
+    procedure OnCountPendingRequestOnTypeCaseElse(var RequestType: Enum PPHRDS_RequestType; var ReqLine: Record PPHRDS_ReqLine; var RequestPurchDocType: Enum PPHRDS_RequestPurchDocType)
+    begin
     end;
 }

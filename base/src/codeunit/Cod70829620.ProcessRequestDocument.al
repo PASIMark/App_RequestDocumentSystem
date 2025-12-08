@@ -452,12 +452,16 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         locProcessedRequestEntry: Record PPHRDS_ProcessedRequestEntry;
         locProcessedReqHeader: Record PPHRDS_ProcessedReqHeader;
         locProcessedReqLine: Record PPHRDS_ProcessedReqLine;
+        ReqLineCopy: Record PPHRDS_ReqLine;
         IsHandled: Boolean;
         ProcReqDocNo: Code[20];
         Vendors: List of [Text];
         VendorNo: Code[20];
         ProcessedReqDic: Dictionary of [Code[20], Code[20]];
         IsHandledApplyDim: Boolean;
+        SplitFixedAsset: Boolean;
+        FixedAssetList: List of [Code[20]];
+        FixedAssetNo: Code[20];
     begin
         OnBeforeNewPurchaseDocument(TempReqLine, IsHandled);
         if IsHandled then
@@ -529,23 +533,66 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
                     locProcessedReqHeader.Get(ProcReqDocNo);
                     InsertProcessedLine(locProcessedReqHeader."No.", locReqLine, locProcessedReqLine);
 
-                    CreatePurchaseLine(locReqLine, locPurchaseHeader, locPurchaseLine, LineRecSysId);
+                    OnNewPurchaseDocumentOnAfterInsertProcessedLine(locProcessedReqHeader."No.", locReqLine, locProcessedReqLine, SplitFixedAsset);
 
-                    ReqHeader.Get(locReqLine."Document No.");
-                    InsertRequestLedgerEntry(ReqHeader, locReqLine, locProcessedRequestEntry);
-                    locProcessedRequestEntry."Processed Request No." := locProcessedReqLine."Document No.";
-                    locProcessedRequestEntry."Processed Request Line No." := locProcessedReqLine."Line No.";
-                    locProcessedRequestEntry."Purchase Document Type" := locPurchaseLine."Document Type";
-                    locProcessedRequestEntry."Purchase Document No." := locPurchaseLine."Document No.";
-                    locProcessedRequestEntry."Purchase Document Line No." := locPurchaseLine."Line No.";
-                    locProcessedRequestEntry."Processed SystemId" := LineRecSysId;
-                    locProcessedRequestEntry."Processed SystemId (Header)" := HeaderRecSysId;
-                    locProcessedRequestEntry.Modify(true);
+                    if SplitFixedAsset then begin
 
-                    IsHandledApplyDim := false;
-                    NewPurchaseDocumenLineOnBeforeApplyDim(TempReqLine, locReqLine, locPurchaseHeader, locPurchaseLine, IsHandledApplyDim);
-                    if not IsHandledApplyDim then
-                        ApplyReqDocDimension(locProcessedRequestEntry, locPurchaseLine);
+                        FixedAssetList := CopyFixedAsset(locReqLine."No.", locReqLine."Qty. to Process");
+                        ReqLineCopy := locReqLine;
+
+                        foreach FixedAssetNo in FixedAssetList do begin
+
+                            ReqLineCopy."No." := FixedAssetNo;
+                            ReqLineCopy."Qty. to Process" := 1;
+                            ReqLineCopy."Qty. to Process (Base)" := 1;
+
+                            CreatePurchaseLine(ReqLineCopy, locPurchaseHeader, locPurchaseLine, LineRecSysId);
+
+                            ReqHeader.Get(ReqLineCopy."Document No.");
+
+                            ReqLineCopy."No." := locReqLine."No.";
+
+                            InsertRequestLedgerEntry(ReqHeader, ReqLineCopy, locProcessedRequestEntry);
+                            locProcessedRequestEntry."Processed Request No." := locProcessedReqLine."Document No.";
+                            locProcessedRequestEntry."Processed Request Line No." := locProcessedReqLine."Line No.";
+                            locProcessedRequestEntry."Purchase Document Type" := locPurchaseLine."Document Type";
+                            locProcessedRequestEntry."Purchase Document No." := locPurchaseLine."Document No.";
+                            locProcessedRequestEntry."Purchase Document Line No." := locPurchaseLine."Line No.";
+                            locProcessedRequestEntry."Processed SystemId" := LineRecSysId;
+                            locProcessedRequestEntry."Processed SystemId (Header)" := HeaderRecSysId;
+                            locProcessedRequestEntry."Generated Fixed Asset No." := FixedAssetNo;
+                            OnNewPurchaseDocumentOnBeforeProcessedRequestEntryModify(ReqHeader, ReqLineCopy, locProcessedRequestEntry);
+                            locProcessedRequestEntry.Modify(true);
+
+                            IsHandledApplyDim := false;
+                            NewPurchaseDocumenLineOnBeforeApplyDim(TempReqLine, ReqLineCopy, locPurchaseHeader, locPurchaseLine, IsHandledApplyDim);
+                            if not IsHandledApplyDim then
+                                ApplyReqDocDimension(locProcessedRequestEntry, locPurchaseLine);
+
+                        end;
+
+                    end else begin
+
+                        CreatePurchaseLine(locReqLine, locPurchaseHeader, locPurchaseLine, LineRecSysId);
+
+                        ReqHeader.Get(locReqLine."Document No.");
+                        InsertRequestLedgerEntry(ReqHeader, locReqLine, locProcessedRequestEntry);
+                        locProcessedRequestEntry."Processed Request No." := locProcessedReqLine."Document No.";
+                        locProcessedRequestEntry."Processed Request Line No." := locProcessedReqLine."Line No.";
+                        locProcessedRequestEntry."Purchase Document Type" := locPurchaseLine."Document Type";
+                        locProcessedRequestEntry."Purchase Document No." := locPurchaseLine."Document No.";
+                        locProcessedRequestEntry."Purchase Document Line No." := locPurchaseLine."Line No.";
+                        locProcessedRequestEntry."Processed SystemId" := LineRecSysId;
+                        locProcessedRequestEntry."Processed SystemId (Header)" := HeaderRecSysId;
+                        OnNewPurchaseDocumentOnBeforeProcessedRequestEntryModify(ReqHeader, locReqLine, locProcessedRequestEntry);
+                        locProcessedRequestEntry.Modify(true);
+
+                        IsHandledApplyDim := false;
+                        NewPurchaseDocumenLineOnBeforeApplyDim(TempReqLine, locReqLine, locPurchaseHeader, locPurchaseLine, IsHandledApplyDim);
+                        if not IsHandledApplyDim then
+                            ApplyReqDocDimension(locProcessedRequestEntry, locPurchaseLine);
+
+                    end;
 
                     locReqLine.InitOutstanding();
                     locReqLine.InitQtyToReceive();
@@ -1232,6 +1279,31 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
         end;
     end;
 
+    local procedure CopyFixedAsset(FixedAssetNo: Code[20]; NoOfCopies: Integer) FixedAssetList: List of [Code[20]]
+    var
+        FixedAsset: Record "Fixed Asset";
+        NewFixedAsset: Record "Fixed Asset";
+        FixedAssetCtr: Integer;
+        IsHandled: Boolean;
+    begin
+        OnBeforeCopyFixedAsset(FixedAssetNo, NoOfCopies, FixedAssetList, IsHandled);
+        if IsHandled then
+            exit;
+
+        Clear(FixedAssetList);
+        FixedAsset.Get(FixedAssetNo);
+
+        for FixedAssetCtr := 1 to NoOfCopies do begin
+            Clear(NewFixedAsset);
+            NewFixedAsset.Init();
+            NewFixedAsset.TransferFields(FixedAsset);
+            NewFixedAsset."No." := '';
+            NewFixedAsset.Insert(true);
+            OnCopyFixedAssetOnAfterInsert(NewFixedAsset);
+            FixedAssetList.Add(NewFixedAsset."No.");
+        end;
+    end;
+
     [IntegrationEvent(false, false)]
     local procedure OnBeforeProcessPurchaseHeader(PurchaseHeader: Record "Purchase Header"; var TempReqLine: Record PPHRDS_ReqLine temporary; var IsHandled: Boolean)
     begin
@@ -1389,6 +1461,26 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
 
     [IntegrationEvent(false, false)]
     local procedure OnAfterInsertRequestLedgerEntry(ReqLine: Record PPHRDS_ReqLine; var parProcessedRequestEntry: Record PPHRDS_ProcessedRequestEntry);
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnNewPurchaseDocumentOnAfterInsertProcessedLine(parDocumentNo: Code[20]; parReqLine: Record PPHRDS_ReqLine; var parProcessedReqLine: Record PPHRDS_ProcessedReqLine; var SplitFixedAsset: Boolean);
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnNewPurchaseDocumentOnBeforeProcessedRequestEntryModify(locReqHeader: Record PPHRDS_ReqHeader; ReqLine: Record PPHRDS_ReqLine; var parProcessedRequestEntry: Record PPHRDS_ProcessedRequestEntry);
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnBeforeCopyFixedAsset(FixedAssetNo: Code[20]; NoOfCopies: Integer; var FixedAssetList: List of [Code[20]]; var IsHandled: Boolean)
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    local procedure OnCopyFixedAssetOnAfterInsert(var NewFixedAsset: Record "Fixed Asset")
     begin
     end;
 }
