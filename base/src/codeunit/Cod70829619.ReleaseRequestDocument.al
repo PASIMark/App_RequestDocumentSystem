@@ -39,7 +39,7 @@ codeunit 70829619 PPHRDS_ReleaseRequestDocument
         ReqLine.SetRange("Document No.", RequestHeader."No.");
         ReqLine.SetFilter(Type, '>0');
         ReqLine.SetFilter(Quantity, '<>0');
-        if not ReqLine.Find('-') then
+        if not ReqLine.FindFirst() then
             Error(NothingToReleaseErr, RequestHeader."No.");
 
         ReqLine.Reset();
@@ -47,7 +47,7 @@ codeunit 70829619 PPHRDS_ReleaseRequestDocument
         ReqLine.SetFilter(Type, '>0');
         // ReqLine.SetFilter(Quantity, '<>0');
         // ReqLine.SetFilter("Qty. to Process", '<>0');
-        if ReqLine.Find('-') then
+        if ReqLine.FindFirst() then
             repeat
 
                 if ReqLine."Request Type" = ReqLine."Request Type"::"Transfer Order" then
@@ -68,9 +68,11 @@ codeunit 70829619 PPHRDS_ReleaseRequestDocument
                                     PurchaseHeader.Get(PurchaseHeader."Document Type"::Order, ReqLine."Applies-to Purch. Doc. No.")
                                 else
                                     PurchaseHeader.Get(PurchaseHeader."Document Type"::Invoice, ReqLine."Applies-to Purch. Doc. No.");
-                                PurchaseHeader.TestField(Status, RequestHeader.Status::Open);
+                                PurchaseHeader.TestField(Status, PurchaseHeader.Status::Open);
                             end;
                         end;
+                    else
+                        OnCodeOnTypeCaseElse(RequestCode, ReqLine);
                 end;
 
                 if ReqLine."Job No." <> '' then
@@ -149,6 +151,11 @@ codeunit 70829619 PPHRDS_ReleaseRequestDocument
 
     [IntegrationEvent(false, false)]
     local procedure OnBeforeReopenReqDoc(var ReqHeader: Record PPHRDS_ReqHeader; var IsHandled: Boolean)
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    procedure OnCodeOnTypeCaseElse(var RequestCode: Record PPHRDS_RequestCode; var ReqLine: Record PPHRDS_ReqLine)
     begin
     end;
 }

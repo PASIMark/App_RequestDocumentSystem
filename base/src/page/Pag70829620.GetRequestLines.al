@@ -295,6 +295,7 @@ page 70829620 "PPHRDS_GetRequestLines"
                 ReqLine.Reset();
                 ReqLine.SetRange("Document No.", ReqHeader."No.");
                 ReqLine.SetRange("Completely Processed", false);
+                OnSetRecordsOnAfterFilterReqLine(ReqLine);
                 if ReqLine.FindSet() then
                     repeat
                         If Not Rec.Get(ReqLine."Document No.", ReqLine."Line No.") then begin
@@ -326,6 +327,7 @@ page 70829620 "PPHRDS_GetRequestLines"
                 ReqLine.SetRange("Request Type", Rec."Request Type"::Purchase);
                 ReqLine.SetRange("Request Purch. Document Type", RequestPurchDocType);
                 ReqLine.SetRange("Completely Processed", false);
+                OnSetRecordsOnAfterFilterReqLine(ReqLine);
                 if ReqLine.FindSet() then
                     repeat
                         If Not Rec.Get(ReqLine."Document No.", ReqLine."Line No.") then begin
@@ -360,6 +362,7 @@ page 70829620 "PPHRDS_GetRequestLines"
                     ReqLine.SetRange("Location Code", TransferHeader."Transfer-to Code");
                 end;
                 ReqLine.SetRange("Completely Processed", false);
+                OnSetRecordsOnAfterFilterReqLine(ReqLine);
                 if ReqLine.FindSet() then
                     repeat
                         If Not Rec.Get(ReqLine."Document No.", ReqLine."Line No.") then begin
@@ -394,6 +397,7 @@ page 70829620 "PPHRDS_GetRequestLines"
                     ReqLine.SetRange("Location Code", TransferHeader."Transfer-to Code");
                 end;
                 ReqLine.SetRange("Completely Processed", false);
+                OnSetRecordsOnAfterFilterReqLine(ReqLine);
                 if ReqLine.FindSet() then
                     repeat
                         If Not Rec.Get(ReqLine."Document No.", ReqLine."Line No.") then begin
@@ -424,6 +428,7 @@ page 70829620 "PPHRDS_GetRequestLines"
                 ReqLine.SetRange("Document No.", ReqHeader."No.");
                 ReqLine.SetRange("Request Type", ReqLine."Request Type"::"Item Journal");
                 ReqLine.SetRange("Completely Processed", false);
+                OnSetRecordsOnAfterFilterReqLine(ReqLine);
                 if ReqLine.FindSet() then
                     repeat
                         If Not Rec.Get(ReqLine."Document No.", ReqLine."Line No.") then begin
@@ -454,6 +459,7 @@ page 70829620 "PPHRDS_GetRequestLines"
                 ReqLine.SetRange("Document No.", ReqHeader."No.");
                 ReqLine.SetRange("Request Type", ReqLine."Request Type"::"Req. Worksheet");
                 ReqLine.SetRange("Completely Processed", false);
+                OnSetRecordsOnAfterFilterReqLine(ReqLine);
                 if ReqLine.FindSet() then
                     repeat
                         If Not Rec.Get(ReqLine."Document No.", ReqLine."Line No.") then begin
@@ -485,6 +491,7 @@ page 70829620 "PPHRDS_GetRequestLines"
                 ReqLine.SetRange("Request Type", ReqLine."Request Type"::"General Journal");
                 ReqLine.SetRange("Journal Template Name", locGenJournalLine."Journal Template Name");
                 ReqLine.SetRange("Completely Processed", false);
+                OnSetRecordsOnAfterFilterReqLine(ReqLine);
                 if ReqLine.FindSet() then
                     repeat
                         If Not Rec.Get(ReqLine."Document No.", ReqLine."Line No.") then begin
@@ -520,5 +527,10 @@ page 70829620 "PPHRDS_GetRequestLines"
                 Rec.FieldError("Qty. to Process");
 
         end;
+    end;
+
+    [IntegrationEvent(false, false)]
+    procedure OnSetRecordsOnAfterFilterReqLine(var ReqLine: Record PPHRDS_ReqLine)
+    begin
     end;
 }

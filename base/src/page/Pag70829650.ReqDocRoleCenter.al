@@ -67,36 +67,42 @@ page 70829650 "PPHRDS_ReqDocRoleCenter"
                     ApplicationArea = All;
                     Caption = 'Vendors';
                     RunObject = Page "Vendor List";
+                    ToolTip = 'View and manage vendor information.';
                 }
                 action(Employees)
                 {
                     ApplicationArea = All;
                     Caption = 'Employees';
                     RunObject = Page "Employee List";
+                    ToolTip = 'View and manage employee information.';
                 }
                 action("G/L Budgets")
                 {
                     ApplicationArea = All;
                     Caption = 'G/L Budgets';
                     RunObject = Page "G/L Budget Names";
+                    ToolTip = 'View and manage G/L budget information.';
                 }
                 action("Purchase Budgets")
                 {
                     ApplicationArea = All;
                     Caption = 'Purchase Budgets';
                     RunObject = Page "Budget Names Purchase";
+                    ToolTip = 'View and manage purchase budget information.';
                 }
                 action("Fixed Asset Budgets")
                 {
                     ApplicationArea = All;
                     Caption = 'Fixed Asset Budgets';
                     RunObject = Page PPHRDS_FixedAssetBudgets;
+                    ToolTip = 'View and manage fixed asset budget information.';
                 }
                 action(RequestCodes)
                 {
                     ApplicationArea = All;
                     Caption = 'Request Codes';
                     RunObject = Page PPHRDS_RequestCodes;
+                    ToolTip = 'View and manage request code information.';
                 }
             }
             group("Requision Processing")
@@ -112,12 +118,14 @@ page 70829650 "PPHRDS_ReqDocRoleCenter"
                     ApplicationArea = All;
                     Caption = 'Processed Requests';
                     RunObject = Page PPHRDS_ProcessedRequestList;
+                    ToolTip = 'View and manage processed request information.';
                 }
                 action("Processed Request Entries")
                 {
                     ApplicationArea = All;
                     Caption = 'Processed Request Entries';
                     RunObject = Page PPHRDS_ProcessedRequestEntries;
+                    ToolTip = 'View and manage processed request entry information.';
                 }
             }
             group(Setup)
@@ -130,6 +138,7 @@ page 70829650 "PPHRDS_ReqDocRoleCenter"
                     ApplicationArea = All;
                     Caption = 'Request Document System Setup';
                     RunObject = Page PPHRDS_ReqDocSysSetup;
+                    ToolTip = 'View and manage request document system setup.';
                 }
             }
         }

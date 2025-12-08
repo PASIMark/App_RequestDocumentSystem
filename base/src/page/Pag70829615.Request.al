@@ -136,7 +136,7 @@ page 70829615 PPHRDS_Request
                 ShowFilter = false;
                 Visible = ShowWorkflowStatus;
             }
-            part("Attached Documents"; "Document Attachment Factbox")
+            part("Attached Documents"; "Doc. Attachment List Factbox")
             {
                 ApplicationArea = All;
                 Caption = 'Attachments';

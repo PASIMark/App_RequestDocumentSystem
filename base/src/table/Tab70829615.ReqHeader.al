@@ -363,6 +363,8 @@ table 70829615 PPHRDS_ReqHeader
             if ReqLinesExist() then
                 UpdateAllLineDim("Dimension Set ID", OldDimSetID);
         end;
+
+        OnAfterValidateShortcutDimCode(Rec, FieldNumber, ShortcutDimCode);
     end;
 
     procedure ShowDocDim();
@@ -382,6 +384,8 @@ table 70829615 PPHRDS_ReqHeader
             if ReqLinesExist() then
                 UpdateAllLineDim("Dimension Set ID", OldDimSetID);
         end;
+
+        OnAfterShowDocDim(Rec, OldDimSetID, "Dimension Set ID");
     end;
 
     local procedure UpdateAllLineDim(NewParentDimSetID: Integer; OldParentDimSetID: Integer);
@@ -490,8 +494,18 @@ table 70829615 PPHRDS_ReqHeader
         RequestApprovalMgt.PreProcessSendApprovalRequestCheckReq(Rec);
     end;
 
-    [IntegrationEvent(TRUE, false)]
+    [IntegrationEvent(true, false)]
     local procedure OnCheckRequestReleaseRestrictions()
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    procedure OnAfterShowDocDim(var ReqHeader: Record PPHRDS_ReqHeader; var OldDimSetID: Integer; var NewDimensionSetID: Integer);
+    begin
+    end;
+
+    [IntegrationEvent(false, false)]
+    procedure OnAfterValidateShortcutDimCode(var ReqHeader: Record PPHRDS_ReqHeader; var FieldNumber: Integer; var ShortcutDimCode: Code[20])
     begin
     end;
 }
