@@ -638,6 +638,61 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 1542707942 - Field 2795922508 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Edit Gen. Journal Line</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Field Allow Edit Gen. Journal Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1542707942 - Field 3007519297 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Edit Item Journal Line</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Field Allow Edit Item Journal Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1542707942 - Field 346406659 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Edit Purchaser w/ Approval</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Field Allow Edit Purch. Code w/ Appr - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1542707942 - Field 466642532 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Edit Purchase Line</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Field Allow Edit Purchase Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1542707942 - Field 906019306 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Edit Released Request Header</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Field Allow Edit Released Req. Hdr - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1542707942 - Field 874475874 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Edit Released Request Line</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Field Allow Edit Released Req. Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1542707942 - Field 3331078646 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Edit Req. Worksheet Line</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Field Allow Edit Req. Wksh. Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1542707942 - Field 1097717291 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Edit Transfer Header</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Field Allow Edit Transfer Header - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1542707942 - Field 3344056580 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Edit Transfer Line</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Field Allow Edit Transfer Line - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1542707942 - Field 2654088282 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Inactive Request Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Field Allow Inactive Request Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1542707942 - Field 1440518248 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Allow Insert Restricted Req. Line</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqDocSysSetup - Field Allow Insert Restr. Req. Line - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 1542707942 - Field 3278559610 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>G/L Budget Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2902,6 +2957,96 @@
           <source>Specifies the Request Nos..</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Request Nos. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 3712624625 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Restrictions</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Restrictions - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 2583272393 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General Journal</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control General Journal - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 2795922508 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users are allowed to edit key fields (Document No., Account Type, Account No., Quantity) on a General or Payment Journal Line that has already been processed from a Request. Turn on to bypass the restriction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Allow Edit Gen. Journal Line - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 3940806096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Journal</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Item Journal - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 3007519297 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users are allowed to edit key fields (Document No., Item No., Location Code, Quantity, Unit of Measure, Gen. Prod. Posting Group) on an Item Journal Line that has already been processed from a Request. Turn on to bypass the restriction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Allow Edit Item Journal Line - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 395510365 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Purchase</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Purchase - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 466642532 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users are allowed to edit key fields (Vendor, Type, No., Location, Unit of Measure, Quantity) on a Purchase Line that has already been processed from a Request. Turn on to bypass the restriction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Allow Edit Purchase Line - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 1985736218 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request Document</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Request Document - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 346406659 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users are allowed to change the Purchaser Code on a Request Header while an approval process is still open. Turn on to bypass the restriction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Allow Edit Purch. Code w/ Appr - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 906019306 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users are allowed to edit key header fields (Requestor ID, Request Date, Document Date, Location Code, Request Code) on a Request after it has been released. Turn on to bypass the restriction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Allow Edit Released Req. Hdr - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 874475874 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users are allowed to edit fields, insert new lines, or delete lines on a Request that has been released. Data-integrity checks (for example, reducing a quantity below what has already been processed) still apply. Turn on to bypass the released-status restriction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Allow Edit Released Req. Line - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 2654088282 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users are allowed to use a Request Code that is marked as inactive on a Request Line. Turn on to bypass the active-code check.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Allow Inactive Request Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 2896033718 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Requisition Worksheet</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Requisition Worksheet - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 3331078646 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users are allowed to edit key fields (Type, No., Location Code, Quantity, Unit of Measure) on a Requisition Line that has already been processed from a Request. Turn on to bypass the restriction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Allow Edit Req. Wksh. Line - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 1440518248 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users are allowed to insert new lines into a Requisition Worksheet that currently has usage restrictions (for example, when the worksheet is pending approval). Turn on to bypass the restriction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Allow Insert Restr. Req. Line - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 4224198349 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transfer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Transfer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 1097717291 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users are allowed to change the Transfer-to Code on a Transfer Header that has already been processed from a Request. Turn on to bypass the restriction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Allow Edit Transfer Header - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1542707942 - Control 3344056580 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies whether users are allowed to edit key fields (Transfer-from Code, Transfer-to Code, Item No., Quantity, Unit of Measure) on a Transfer Line that has already been processed from a Request. Turn on to bypass the restriction.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ReqDocSysSetup - Control Allow Edit Transfer Line - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 1542707942 - Action 2887148869 - Property 1064389655" size-unit="char" translate="yes" xml:space="preserve">
           <source>Create Setup Data.</source>
