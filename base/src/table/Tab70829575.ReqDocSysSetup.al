@@ -74,6 +74,61 @@ table 70829575 "PPHRDS_ReqDocSysSetup"
         //     Caption = 'Canvass Archive Nos.';
         //     TableRelation = "No. Series";
         // }
+        field(200; "Allow Edit Purchase Line"; Boolean)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Allow Edit Purchase Line';
+        }
+        field(201; "Allow Edit Transfer Header"; Boolean)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Allow Edit Transfer Header';
+        }
+        field(202; "Allow Edit Transfer Line"; Boolean)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Allow Edit Transfer Line';
+        }
+        field(203; "Allow Edit Item Journal Line"; Boolean)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Allow Edit Item Journal Line';
+        }
+        field(204; "Allow Edit Req. Wksh. Line"; Boolean)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Allow Edit Req. Worksheet Line';
+        }
+        field(205; "Allow Insert Restr. Req. Line"; Boolean)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Allow Insert Restricted Req. Line';
+        }
+        field(206; "Allow Edit Gen. Journal Line"; Boolean)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Allow Edit Gen. Journal Line';
+        }
+        field(207; "Allow Edit Released Req. Hdr"; Boolean)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Allow Edit Released Request Header';
+        }
+        field(208; "Allow Edit Released Req. Line"; Boolean)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Allow Edit Released Request Line';
+        }
+        field(209; "Allow Edit Purch. Code w/ Appr"; Boolean)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Allow Edit Purchaser w/ Approval';
+        }
+        field(210; "Allow Inactive Request Code"; Boolean)
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Allow Inactive Request Code';
+        }
     }
 
     keys

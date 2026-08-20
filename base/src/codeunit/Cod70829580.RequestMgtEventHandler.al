@@ -19,8 +19,16 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         LineNoAssignedToReqErr: Label 'The Line No. %1. is assigned to Request No. %2.', Comment = '%1 = Line No. field, %2 = Request No.';
         TransOrderNoAssignedToReqErr: Label 'The Transfer Order No. %1. is assigned to Request No. %2.', Comment = '%1 = Transfer Order No. field, %2 = Request No.';
 
+    local procedure GetReqDocSysSetup(var ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup)
+    begin
+        if not ReqDocSysSetup.Get() then
+            ReqDocSysSetup.Init();
+    end;
+
     [EventSubscriber(ObjectType::Table, Database::"Purchase Line", 'OnBeforeValidateEvent', 'Quantity', false, false)]
     local procedure OnBeforeValidateEventQuantity(var Rec: Record "Purchase Line"; var xRec: Record "Purchase Line"; CurrFieldNo: Integer);
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if CurrFieldNo = 0 then
             exit;
@@ -31,12 +39,18 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         if (xRec.Quantity = Rec.Quantity) then
             exit;
 
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Edit Purchase Line" then
+            exit;
+
         if RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
             Error(LineNoAssignedToReqErr, Rec."Line No.", ProcessedRequestEntry."Request No.");
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Purchase Line", 'OnBeforeModifyEvent', '', false, false)]
     local procedure OnModifyPurchaseLine(var Rec: Record "Purchase Line"; var xRec: Record "Purchase Line"; RunTrigger: Boolean);
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if IsNullGuid(Rec.SystemId) then
             exit;
@@ -46,6 +60,10 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         (xRec."No." = Rec."No.") and
         (xRec."Location Code" = Rec."Location Code") and
         (xRec."Unit of Measure Code" = Rec."Unit of Measure Code") then
+            exit;
+
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Edit Purchase Line" then
             exit;
 
         if RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
@@ -62,8 +80,14 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
 
     [EventSubscriber(ObjectType::Table, Database::"Transfer Header", 'OnBeforeValidateTransferToCode', '', false, false)]
     local procedure TransferHeaderOnBeforeValidateTransferToCode(var TransferHeader: Record "Transfer Header"; var xTransferHeader: Record "Transfer Header"; var IsHandled: Boolean; var HideValidationDialog: Boolean)
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if IsNullGuid(TransferHeader.SystemId) then
+            exit;
+
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Edit Transfer Header" then
             exit;
 
         if RequestManagement.IsProcessedRequestEntryHeaderExist(TransferHeader.SystemId, ProcessedRequestEntry) then
@@ -72,6 +96,8 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
 
     [EventSubscriber(ObjectType::Table, Database::"Transfer Line", 'OnBeforeModifyEvent', '', false, false)]
     local procedure OnModifyTransferLine(var Rec: Record "Transfer Line"; var xRec: Record "Transfer Line"; RunTrigger: Boolean);
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if IsNullGuid(Rec.SystemId) then
             exit;
@@ -84,12 +110,18 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         then
             exit;
 
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Edit Transfer Line" then
+            exit;
+
         if RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
             Error(LineNoAssignedToReqErr, Rec."Line No.", ProcessedRequestEntry."Request No.");
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Item Journal Line", 'OnBeforeModifyEvent', '', false, false)]
     local procedure OnModifyItemJournalLine(var Rec: Record "Item Journal Line"; var xRec: Record "Item Journal Line"; RunTrigger: Boolean);
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if not RunTrigger then
             exit;
@@ -106,12 +138,18 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         then
             exit;
 
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Edit Item Journal Line" then
+            exit;
+
         if RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
             Error(LineNoAssignedToReqErr, Rec."Line No.", ProcessedRequestEntry."Request No.");
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Requisition Line", 'OnAfterValidateEvent', 'Type', false, false)]
     local procedure RequisitionLineOnAfterValidateEventType(var Rec: Record "Requisition Line"; var xRec: Record "Requisition Line"; CurrFieldNo: Integer);
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if CurrFieldNo = 0 then
             exit;
@@ -122,12 +160,18 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         if xRec.Type = Rec.Type then
             exit;
 
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Edit Req. Wksh. Line" then
+            exit;
+
         if RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
             Error(LineNoAssignedToReqErr, Rec."Line No.", ProcessedRequestEntry."Request No.");
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Requisition Line", 'OnAfterValidateEvent', 'No.', false, false)]
     local procedure RequisitionLineOnAfterValidateEventNo(var Rec: Record "Requisition Line"; var xRec: Record "Requisition Line"; CurrFieldNo: Integer);
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if CurrFieldNo = 0 then
             exit;
@@ -138,12 +182,18 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         if xRec."No." = Rec."No." then
             exit;
 
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Edit Req. Wksh. Line" then
+            exit;
+
         if RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
             Error(LineNoAssignedToReqErr, Rec."Line No.", ProcessedRequestEntry."Request No.");
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Requisition Line", 'OnAfterValidateEvent', 'Location Code', false, false)]
     local procedure RequisitionLineOnAfterValidateEventLocationCode(var Rec: Record "Requisition Line"; var xRec: Record "Requisition Line"; CurrFieldNo: Integer);
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if CurrFieldNo = 0 then
             exit;
@@ -154,12 +204,18 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         if xRec."Location Code" = Rec."Location Code" then
             exit;
 
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Edit Req. Wksh. Line" then
+            exit;
+
         if RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
             Error(LineNoAssignedToReqErr, Rec."Line No.", ProcessedRequestEntry."Request No.");
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Requisition Line", 'OnAfterValidateEvent', 'Quantity', false, false)]
     local procedure RequisitionLineOnAfterValidateEventQuantity(var Rec: Record "Requisition Line"; var xRec: Record "Requisition Line"; CurrFieldNo: Integer);
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if CurrFieldNo = 0 then
             exit;
@@ -170,12 +226,18 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         if xRec.Quantity = Rec.Quantity then
             exit;
 
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Edit Req. Wksh. Line" then
+            exit;
+
         if RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
             Error(LineNoAssignedToReqErr, Rec."Line No.", ProcessedRequestEntry."Request No.");
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Requisition Line", 'OnAfterValidateEvent', 'Unit of Measure Code', false, false)]
     local procedure RequisitionLineOnAfterValidateEventUnitofMeasureCode(var Rec: Record "Requisition Line"; var xRec: Record "Requisition Line"; CurrFieldNo: Integer);
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if CurrFieldNo = 0 then
             exit;
@@ -186,12 +248,18 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
         if xRec."Unit of Measure Code" = Rec."Unit of Measure Code" then
             exit;
 
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Edit Req. Wksh. Line" then
+            exit;
+
         if RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
             Error(LineNoAssignedToReqErr, Rec."Line No.", ProcessedRequestEntry."Request No.");
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Gen. Journal Line", 'OnBeforeModifyEvent', '', false, false)]
     local procedure OnModifyGenJournalLine(var Rec: Record "Gen. Journal Line"; var xRec: Record "Gen. Journal Line"; RunTrigger: Boolean);
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if not RunTrigger then
             exit;
@@ -204,6 +272,10 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
             (xRec."Account No." = Rec."Account No.") and
             (xRec.Quantity = Rec.Quantity)
         then
+            exit;
+
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Edit Gen. Journal Line" then
             exit;
 
         if RequestManagement.IsProcessedRequestEntryExist(Rec.SystemId, ProcessedRequestEntry) then
@@ -314,8 +386,14 @@ codeunit 70829580 "PPHRDS_RequestMgtEventHandler"
 
     [EventSubscriber(ObjectType::Table, Database::"Requisition Line", 'OnBeforeInsertEvent', '', false, false)]
     local procedure RequisitionLineOnBeforeInsertEvent(var Rec: Record "Requisition Line"; RunTrigger: Boolean);
+    var
+        ReqDocSysSetup: Record PPHRDS_ReqDocSysSetup;
     begin
         if not RunTrigger then
+            exit;
+
+        GetReqDocSysSetup(ReqDocSysSetup);
+        if ReqDocSysSetup."Allow Insert Restr. Req. Line" then
             exit;
 
         CheckReqWkshHasUsageRestrictions(Rec);

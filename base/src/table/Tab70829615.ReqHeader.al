@@ -53,7 +53,7 @@ table 70829615 PPHRDS_ReqHeader
             var
                 UserSelctn: Codeunit "User Selection";
             begin
-                TestField(Status, Status::Open);
+                TestStatusOpen();
 
                 UserSelctn.ValidateUserName("Requestor ID");
 
@@ -76,7 +76,7 @@ table 70829615 PPHRDS_ReqHeader
 
             trigger OnValidate();
             begin
-                TestField(Status, Status::Open);
+                TestStatusOpen();
 
                 ReqLine.Reset();
                 ReqLine.SetRange("Document No.", "No.");
@@ -94,7 +94,7 @@ table 70829615 PPHRDS_ReqHeader
 
             trigger OnValidate();
             begin
-                TestField(Status, Status::Open);
+                TestStatusOpen();
             end;
         }
         field(25; "Shortcut Dimension 1 Code"; Code[20])
@@ -129,7 +129,7 @@ table 70829615 PPHRDS_ReqHeader
 
             trigger OnValidate();
             begin
-                TestField(Status, Status::Open);
+                TestStatusOpen();
 
                 CheckLocation();
             end;
@@ -144,11 +144,14 @@ table 70829615 PPHRDS_ReqHeader
             var
                 ApprovalEntry: Record "Approval Entry";
             begin
-                ApprovalEntry.SetRange("Table ID", DATABASE::PPHRDS_ReqHeader);
-                ApprovalEntry.SetRange("Document No.", "No.");
-                ApprovalEntry.SetFilter(Status, '%1|%2', ApprovalEntry.Status::Created, ApprovalEntry.Status::Open);
-                if not ApprovalEntry.IsEmpty then
-                    Error(CancelApprovalErr, FieldCaption("Purchaser Code"));
+                GetRequestSetup();
+                if not RequestSetup."Allow Edit Purch. Code w/ Appr" then begin
+                    ApprovalEntry.SetRange("Table ID", DATABASE::PPHRDS_ReqHeader);
+                    ApprovalEntry.SetRange("Document No.", "No.");
+                    ApprovalEntry.SetFilter(Status, '%1|%2', ApprovalEntry.Status::Created, ApprovalEntry.Status::Open);
+                    if not ApprovalEntry.IsEmpty then
+                        Error(CancelApprovalErr, FieldCaption("Purchaser Code"));
+                end;
 
                 CreateDim(
                   DATABASE::"Salesperson/Purchaser", "Purchaser Code");
@@ -217,7 +220,7 @@ table 70829615 PPHRDS_ReqHeader
 
             trigger OnValidate();
             begin
-                TestField(Status, Status::Open);
+                TestStatusOpen();
 
                 CheckLocation();
 
@@ -342,6 +345,15 @@ table 70829615 PPHRDS_ReqHeader
     local procedure GetRequestSetup();
     begin
         RequestSetup.Get();
+    end;
+
+    local procedure TestStatusOpen();
+    begin
+        GetRequestSetup();
+        if RequestSetup."Allow Edit Released Req. Hdr" then
+            exit;
+
+        TestField(Status, Status::Open);
     end;
 
     procedure ReqLinesExist(): Boolean;

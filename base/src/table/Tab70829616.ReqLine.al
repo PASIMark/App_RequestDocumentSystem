@@ -865,6 +865,10 @@ table 70829616 PPHRDS_ReqLine
     local procedure TestStatusOpen();
     begin
         GetReqHeader();
+        GetReqSetup();
+        if RequestSetup."Allow Edit Released Req. Line" then
+            exit;
+
         ReqHeader.TestField(Status, ReqHeader.Status::Open);
     end;
 
@@ -932,7 +936,9 @@ table 70829616 PPHRDS_ReqLine
         if not RequestCode.Get("Request Code") then
             exit;
 
-        RequestCode.TestField(Active, true);
+        GetReqSetup();
+        if not RequestSetup."Allow Inactive Request Code" then
+            RequestCode.TestField(Active, true);
 
         if (RequestCode.Type = RequestCode.Type::"Transfer Order") and (Type in [Type::"G/L Account", Type::"Fixed Asset"]) then
             TestField(Type, Type::Item);
