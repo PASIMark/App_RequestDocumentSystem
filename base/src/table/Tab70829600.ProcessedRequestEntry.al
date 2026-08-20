@@ -286,6 +286,12 @@ table 70829600 PPHRDS_ProcessedRequestEntry
             DataClassification = CustomerContent;
             Caption = 'Original Quantity';
         }
+        field(301; "Generated Fixed Asset No."; Code[20])
+        {
+            DataClassification = CustomerContent;
+            Caption = 'Generated Fixed Asset No.';
+            Editable = false;
+        }
         field(130; "IC Partner Code"; Code[20])
         {
             Caption = 'IC Partner Code';

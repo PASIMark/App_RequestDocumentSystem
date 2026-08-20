@@ -562,6 +562,7 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
                             locProcessedRequestEntry."Processed SystemId" := LineRecSysId;
                             locProcessedRequestEntry."Processed SystemId (Header)" := HeaderRecSysId;
                             locProcessedRequestEntry."Generated Fixed Asset No." := FixedAssetNo;
+ 
                             OnNewPurchaseDocumentOnBeforeProcessedRequestEntryModify(ReqHeader, ReqLineCopy, locProcessedRequestEntry);
                             locProcessedRequestEntry.Modify(true);
 
@@ -578,10 +579,10 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
 
                         ReqHeader.Get(locReqLine."Document No.");
 
-                    if not ReqDocDic.Get(TempReqLine."Document No.", ReqDocNo) then begin
-                        ReqDocDic.Add(TempReqLine."Document No.", TempReqLine."Document No.");
-                        TransferAttachmentOnPurchaseHeaderInsert(locPurchaseHeader, TempReqLine."Document No.");
-                    end;
+                        if not ReqDocDic.Get(TempReqLine."Document No.", ReqDocNo) then begin
+                            ReqDocDic.Add(TempReqLine."Document No.", TempReqLine."Document No.");
+                            TransferAttachmentOnPurchaseHeaderInsert(locPurchaseHeader, TempReqLine."Document No.");
+                        end;
 
                         InsertRequestLedgerEntry(ReqHeader, locReqLine, locProcessedRequestEntry);
                         locProcessedRequestEntry."Processed Request No." := locProcessedReqLine."Document No.";
@@ -1338,6 +1339,36 @@ codeunit 70829620 PPHRDS_ProcessRequestDocument
             DimensionManagement.UpdateGlobalDimFromDimSetID(GenJournalLine."Dimension Set ID", GenJournalLine."Shortcut Dimension 1 Code", GenJournalLine."Shortcut Dimension 2 Code");
             GenJournalLine.Modify(true);
         end;
+    end;
+
+    local procedure TransferAttachmentOnPurchaseHeaderInsert(pPurchHeader: Record "Purchase Header"; pReqHeaderNo: Code[20])
+    var
+        DocumentAttachment: Record "Document Attachment";
+        DocumentAttachmentCopy: Record "Document Attachment";
+        LastLineNo: Integer;
+    begin
+        DocumentAttachment.Reset();
+        DocumentAttachment.SetRange("Table ID", Database::PPHRDS_ReqHeader);
+        DocumentAttachment.SetRange("No.", pReqHeaderNo);
+        DocumentAttachment.SetRange("Document Type", DocumentAttachment."Document Type"::PPHRDS_Request);
+        if DocumentAttachment.FindSet() then
+            repeat
+                DocumentAttachmentCopy.Validate("Table ID", Database::"Purchase Header");
+                DocumentAttachmentCopy.Validate("No.", pPurchHeader."No.");
+                DocumentAttachmentCopy."Attached Date" := DocumentAttachment."Attached Date";
+                DocumentAttachmentCopy."File Name" := DocumentAttachment."File Name";
+                DocumentAttachmentCopy."File Extension" := DocumentAttachment."File Extension";
+                DocumentAttachmentCopy."Document Reference ID" := DocumentAttachment."Document Reference ID";
+                DocumentAttachmentCopy."Attached By" := DocumentAttachment."Attached By";
+                DocumentAttachmentCopy.User := DocumentAttachment.User;
+                DocumentAttachmentCopy."Document Flow Sales" := DocumentAttachment."Document Flow Sales";
+                DocumentAttachmentCopy.Validate("Document Type", pPurchHeader."Document Type");
+                DocumentAttachmentCopy."Line No." := DocumentAttachment."Line No.";
+                DocumentAttachmentCopy."VAT Report Config. Code" := DocumentAttachment."VAT Report Config. Code";
+                DocumentAttachmentCopy."Document Flow Service" := DocumentAttachment."Document Flow Service";
+                DocumentAttachmentCopy."Document Flow Production" := DocumentAttachment."Document Flow Production";
+                DocumentAttachmentCopy.Insert(true);
+            until DocumentAttachment.Next() = 0;
     end;
 
     local procedure TransferAttachmentOnPurchaseHeaderInsert(pPurchHeader: Record "Purchase Header"; pReqHeaderNo: Code[20])
