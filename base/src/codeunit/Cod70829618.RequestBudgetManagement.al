@@ -376,11 +376,11 @@ codeunit 70829618 PPHRDS_RequestBudgetManagement
         if GlobalDim1Filter <> '' then
             GLAccBudgetBuffer.SetFilter("Global Dimension 1 Filter", GlobalDim1Filter)
         else
-            ItemStatisticsBuf.SetRange("Global Dimension 1 Filter", ' ');
+            GLAccBudgetBuffer.SetRange("Global Dimension 1 Filter", '');
         if GlobalDim2Filter <> '' then
             GLAccBudgetBuffer.SetFilter("Global Dimension 2 Filter", GlobalDim2Filter)
         else
-            ItemStatisticsBuf.SetRange("Global Dimension 2 Filter", ' ');
+            GLAccBudgetBuffer.SetRange("Global Dimension 2 Filter", '');
         GLAccBudgetBuffer.SetFilter("Budget Dimension 1 Filter", BudgetDim1Filter);
         GLAccBudgetBuffer.SetFilter("Budget Dimension 2 Filter", BudgetDim2Filter);
         GLAccBudgetBuffer.SetFilter("Budget Dimension 3 Filter", BudgetDim3Filter);
@@ -441,11 +441,11 @@ codeunit 70829618 PPHRDS_RequestBudgetManagement
         if GlobalDim1Filter <> '' then
             GLEntry.SetFilter("Global Dimension 1 Code", GlobalDim1Filter)
         else
-            GLEntry.SetRange("Global Dimension 2 Code", ' ');
+            GLEntry.SetRange("Global Dimension 1 Code", '');
         if GlobalDim2Filter <> '' then
             GLEntry.SetFilter("Global Dimension 2 Code", GlobalDim2Filter)
         else
-            GLEntry.SetRange("Global Dimension 2 Code", ' ');
+            GLEntry.SetRange("Global Dimension 2 Code", '');
     end;
 
     // local procedure SetCommonActualItemFilters(ItemFilter: Text; LocationFilter: Text; DateFilter: Text; GlobalDim1Filter: Text; GlobalDim2Filter: Text);

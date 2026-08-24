@@ -213,6 +213,46 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedReqLine - Field Expense G/L Account No. - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 635602356 - Field 575636717 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Item Reference No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedReqLine - Field IC Item Reference No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 635602356 - Field 1329258699 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Partner Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedReqLine - Field IC Partner Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 635602356 - Field 5458013 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Partner Ref. Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedReqLine - Field IC Partner Ref. Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 635602356 - Field 1303275385 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Partner Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedReqLine - Field IC Partner Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 635602356 - Field 3948462483 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedReqLine - Field Item Reference No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 635602356 - Field 1845030186 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedReqLine - Field Item Reference Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 635602356 - Field 3418857923 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference Type No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedReqLine - Field Item Reference Type No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 635602356 - Field 323735931 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference Unit of Measure</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedReqLine - Field Item Reference Unit of Measure - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 635602356 - Field 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -368,6 +408,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedReqLine - Field Unit of Measure Code - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 635602356 - Field 3450651614 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Variant Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedReqLine - Field Variant Code - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 635602356 - Field 3119688693 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Vendor Name</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -437,6 +482,46 @@
           <source>Generated Fixed Asset No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field Generated Fixed Asset No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2492377119 - Field 575636717 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Item Reference No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field IC Item Reference No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2492377119 - Field 1329258699 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Partner Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field IC Partner Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2492377119 - Field 5458013 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Partner Ref. Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field IC Partner Ref. Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2492377119 - Field 1303275385 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Partner Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field IC Partner Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2492377119 - Field 3948462483 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field Item Reference No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2492377119 - Field 1845030186 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field Item Reference Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2492377119 - Field 3418857923 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference Type No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field Item Reference Type No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2492377119 - Field 323735931 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference Unit of Measure</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field Item Reference Unit of Measure - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2492377119 - Field 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job No.</source>
@@ -622,6 +707,11 @@
           <source>Unit of Measure Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field Unit of Measure Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2492377119 - Field 3450651614 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Variant Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ProcessedRequestEntry - Field Variant Code - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2492377119 - Field 3119688693 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Vendor Name</source>
@@ -868,6 +958,11 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Budget Remaining - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 2276173784 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Buy-from IC Partner Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Buy-from IC Partner Code - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Table 2024772494 - Field 2590371178 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Completely Requested</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -912,6 +1007,46 @@
           <source>Expense G/L Account No.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Expense G/L Account No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 575636717 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Item Reference No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field IC Item Reference No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 1329258699 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Partner Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field IC Partner Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 5458013 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Partner Ref. Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field IC Partner Ref. Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 1303275385 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>IC Partner Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field IC Partner Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 3948462483 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Item Reference No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 1845030186 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Item Reference Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 3418857923 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference Type No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Item Reference Type No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 323735931 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Item Reference Unit of Measure</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Item Reference Unit of Measure - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2024772494 - Field 1908272084 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Job No.</source>
@@ -967,6 +1102,11 @@
           <source>Outstanding Quantity</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Outstanding Quantity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 4106826609 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Pay-to IC Partner Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Pay-to IC Partner Code - Property Caption</note>
         </trans-unit>
         <trans-unit id="Table 2024772494 - Field 806193894 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Qty. per Unit of Measure</source>
@@ -1072,6 +1212,16 @@
           <source>Unit of Measure Code</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Unit of Measure Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 3450651614 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Variant Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Variant Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2024772494 - Field 3450651614 - Method 2126772001 - NamedType 1542347064" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Request Type can only be either Purchase, Transfer Order or Item Journal</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_ReqLine - Field Variant Code - Method OnValidate - NamedType RequestTypeErr</note>
         </trans-unit>
         <trans-unit id="Table 2024772494 - Field 2903269170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Vendor Item No.</source>
@@ -1237,6 +1387,16 @@
           <source>Open</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Table PPHRDS_RequestDocumentCue - Field User Req. - Open - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2016140358 - NamedType 1165000193" size-unit="char" translate="yes" xml:space="preserve">
+          <source>There are no items with reference %1.</source>
+          <note from="Developer" annotates="general" priority="2">%1=Reference No.</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PPHRDS_ItemReferenceMgt - NamedType ItemRefNotExistErr</note>
+        </trans-unit>
+        <trans-unit id="Codeunit 2016140358 - NamedType 3960679406" size-unit="char" translate="yes" xml:space="preserve">
+          <source>The reference type must be Customer or Vendor.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Codeunit PPHRDS_ItemReferenceMgt - NamedType ItemRefWrongTypeErr</note>
         </trans-unit>
         <trans-unit id="Codeunit 2693191966 - NamedType 3764163105" size-unit="char" translate="yes" xml:space="preserve">
           <source>Your license is not valid for a team member user.</source>
@@ -1993,6 +2153,46 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestEntries - Control Expected Receipt Date - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 1068051933 - Control 575636717 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the IC Item Reference No. field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestEntries - Control IC Item Reference No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1068051933 - Control 1329258699 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the IC Partner Code field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestEntries - Control IC Partner Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1068051933 - Control 5458013 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the IC Partner Ref. Type field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestEntries - Control IC Partner Ref. Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1068051933 - Control 1303275385 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the IC Partner Reference field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestEntries - Control IC Partner Reference - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1068051933 - Control 3948462483 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Item Reference No. field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestEntries - Control Item Reference No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1068051933 - Control 1845030186 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Item Reference Type field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestEntries - Control Item Reference Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1068051933 - Control 3418857923 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Item Reference Type No. field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestEntries - Control Item Reference Type No. - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1068051933 - Control 323735931 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the value of the Item Reference Unit of Measure field.</source>
+          <note from="Developer" annotates="general" priority="2">%</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestEntries - Control Item Reference Unit of Measure - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 1068051933 - Control 2704330142 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the Journal Batch Name.</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2102,6 +2302,11 @@
           <source>Specifies the Unit of Measure Code.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestEntries - Control Unit of Measure Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1068051933 - Control 3450651614 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the Variant Code.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestEntries - Control Variant Code - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 1068051933 - Action 1402615620 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>&amp;Line</source>
@@ -2303,6 +2508,26 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestSubform - Control Expected Receipt Date - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 205228893 - Control 1329258699 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the IC Partner Code.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestSubform - Control IC Partner Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 205228893 - Control 5458013 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the IC Partner Ref. Type.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestSubform - Control IC Partner Ref. Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 205228893 - Control 1303275385 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the IC Partner Reference.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestSubform - Control IC Partner Reference - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 205228893 - Control 3948462483 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the Item Reference No..</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestSubform - Control Item Reference No. - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 205228893 - Control 1908272084 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the Job No..</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -2402,6 +2627,11 @@
           <source>Specifies the Unit of Measure Code.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestSubform - Control Unit of Measure Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 205228893 - Control 3450651614 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the Variant Code.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_ProcessedRequestSubform - Control Variant Code - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 205228893 - Control 3119688693 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the Vendor Name.</source>
@@ -3943,6 +4173,26 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestSubform - Control Expected Receipt Date - Property ToolTip</note>
         </trans-unit>
+        <trans-unit id="Page 1658663251 - Control 1329258699 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the IC Partner Code.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestSubform - Control IC Partner Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1658663251 - Control 5458013 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the IC Partner Ref. Type.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestSubform - Control IC Partner Ref. Type - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1658663251 - Control 1303275385 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the IC Partner Reference.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestSubform - Control IC Partner Reference - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1658663251 - Control 3948462483 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the Item Reference No..</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestSubform - Control Item Reference No. - Property ToolTip</note>
+        </trans-unit>
         <trans-unit id="Page 1658663251 - Control 1908272084 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the Job No..</source>
           <note from="Developer" annotates="general" priority="2"></note>
@@ -4052,6 +4302,11 @@
           <source>Specifies the Unit of Measure Code.</source>
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestSubform - Control Unit of Measure Code - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 1658663251 - Control 3450651614 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Specifies the Variant Code.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page PPHRDS_RequestSubform - Control Variant Code - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 1658663251 - Control 3119688693 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Specifies the Vendor Name.</source>
