@@ -713,7 +713,9 @@ table 70829616 PPHRDS_ReqLine
                 ItemReferenceMgt: codeunit "Item Reference Management";
                 ItemRefMgt: codeunit PPHRDS_ItemReferenceMgt;
             begin
-                IsValidReqCode();
+                IF Rec."Request Type" = Rec."Request Type"::"General Journal" then begin
+                    IsValidReqCode();
+                end;
                 GetReqHeader();
                 ItemRefMgt.PurchaseReferenceNoLookUp(Rec, ReqHeader);
             end;
@@ -723,7 +725,9 @@ table 70829616 PPHRDS_ReqLine
                 ItemReference: Record "Item Reference";
                 ItemRefMgt: codeunit PPHRDS_ItemReferenceMgt;
             begin
-                IsValidReqCode();
+                IF Rec."Request Type" = Rec."Request Type"::"General Journal" then begin
+                    IsValidReqCode();
+                end;
                 GetReqHeader();
                 ItemRefMgt.ValidateReqReferenceNo(Rec, ReqHeader, ItemReference, true, CurrFieldNo);
             end;
